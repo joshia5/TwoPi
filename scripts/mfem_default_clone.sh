@@ -20,7 +20,9 @@ DO_LATEST=false
 # SHA (v4.1)
 #SHA=8dbbcfc25629ac7612fe31afd5b511752ff0e69b
 # defualt SHA (v4.2)
-SHA=ed5604e0d350461f20842275578aa2f9e6a61343
+#SHA=ed5604e0d350461f20842275578aa2f9e6a61343
+# defualt SHA (v4.3)
+SHA=c528f79c9fc2f92612660ccf0f98cd1fe95879dc
 BRANCH=master
 
 while [[ $# -gt 0 ]]
