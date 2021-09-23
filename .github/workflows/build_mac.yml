@@ -1,0 +1,27 @@
+
+name: build_mac
+
+on:
+#  push:
+#     tags:
+#        - '*'
+   pull_request:
+      branches: [master]
+	
+jobs:
+  build-and-test:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [macos-latest] #[macos-10.15, macox-11]
+        include:
+        - os: macos-latest
+#          INSTALL_DEPS: brew install boost lua
+          CC: clang
+          CXX: clang++
+    steps:
+      - uses: actions/checkout@v2
+      - name: install-dependencies
+        run:
+            brew tap piScope/twopi
+	    brew install -v -s piscope/twopi/twopi 
