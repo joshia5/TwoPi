@@ -24,4 +24,4 @@ jobs:
       - name: install-dependencies
         run:
             brew tap piScope/twopi
-	    brew install -v -s piscope/twopi/twopi 
+            brew install -v -s piscope/twopi/twopi 
