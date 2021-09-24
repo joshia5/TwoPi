@@ -153,7 +153,7 @@ LIBOTHERS = -lpthread
 CDEFS = -DAdd_
 
 #COMPILER OPTIONS
-OPTF    = -O -I/usr/local/include -L/usr/local/lib/ ${OMPFCFLAG} -fPIC -DBLR_MT
+OPTF    = -O -fallow-argument-mismatch -I/usr/local/include -L/usr/local/lib/ ${OMPFCFLAG} -fPIC -DBLR_MT
 OPTC    = -O -fPIC ${OMPCCFLAG} -I.
 OPTL    = -O -I/usr/local/include -L/usr/local/lib/ ${OMPLINKFLAG}
 
