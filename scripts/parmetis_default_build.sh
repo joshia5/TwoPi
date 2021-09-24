@@ -50,18 +50,22 @@ done
 
 cd ${SRCDIR}/parmetis-4.0.3
 
+BKEXT=''
+if [[ "${TwoPiDevice}" == "brew" ]]; then
+  BKEXT='.bu'   ### On MacOS, -i option needs extension.
+fi
 if [ "$DO_INT64" -eq "1" ]; then
     echo "!!!! 64 bit int mode"
-    sed -i 's/#define IDXTYPEWIDTH 32/#define IDXTYPEWIDTH 64/g' metis/include/metis.h
+    sed -i${BKEXT} 's/#define IDXTYPEWIDTH 32/#define IDXTYPEWIDTH 64/g' metis/include/metis.h
 else
-    sed -i 's/#define IDXTYPEWIDTH 64/#define IDXTYPEWIDTH 32/g' metis/include/metis.h
+    sed -i${BKEXT} 's/#define IDXTYPEWIDTH 64/#define IDXTYPEWIDTH 32/g' metis/include/metis.h
 fi
 
 if [ "$DO_REAL64" -eq "1" ]; then
     echo "!!!! 64 bit real mode"
-    sed -i 's/#define REALTYPEWIDTH 32/#define REALTYPEWIDTH 64/g' metis/include/metis.h
+    sed -i${BKEXT} 's/#define REALTYPEWIDTH 32/#define REALTYPEWIDTH 64/g' metis/include/metis.h
 else
-    sed -i 's/#define REALTYPEWIDTH 64/#define REALTYPEWIDTH 32/g' metis/include/metis.h
+    sed -i${BKEXT} 's/#define REALTYPEWIDTH 64/#define REALTYPEWIDTH 32/g' metis/include/metis.h
 fi
 
 export CFLAGS="${CFLAGS} -fPIC"
