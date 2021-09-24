@@ -23,6 +23,11 @@ jobs:
           CXX: clang++
     steps:
       - uses: actions/checkout@v2
+      - name: install-dependencies1
+        run: |
+            brew install cmake open-mpi scalapack wget zlib netcdf hdf5 numpy scipy coreutils llvm libomp gmsh wxPython mpi4py mercurial
+      - name: install-dependencies2
+        run: |
       - name: install-packages
         run: |
             brew tap piScope/twopi
