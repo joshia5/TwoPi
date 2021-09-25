@@ -156,4 +156,4 @@ $TWOPI build PetraM_RF
 
 echo PetraM_MUMPS
 $TWOPI clone PetraM_MUMPS   |tee $LOGDIR/PetraM_MUMPS.log 2>&1
-$TWOPI build PetraM_MUMPS
+$TWOPI build PetraM_MUMPS --disable-scotch
