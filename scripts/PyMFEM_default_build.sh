@@ -105,17 +105,19 @@ fi
 
 if $DO_SWIG ;then
     ${PYTHON} setup.py install --swig               \
-	   --with-parallel                       \
-           --mfem-prefix=${TwoPiRoot}/mfem       \
-           --mfemp-prefix=${TwoPiRoot}/mfem/par  \
-           --mfems-prefix=${TwoPiRoot}/mfem/ser  \
-           $DRY_RUN
+	      --with-parallel                       \
+              --prefix=${TwoPiRoot}                 \
+              --mfem-prefix=${TwoPiRoot}/mfem       \
+              --mfemp-prefix=${TwoPiRoot}/mfem/par  \
+              --mfems-prefix=${TwoPiRoot}/mfem/ser  \
+              $DRY_RUN
     
     exit 0
 fi
 
 if $DO_SERIAL;then
-    ${PYTHON} setup.py install                      \
+    ${PYTHON} setup.py install                   \
+           --prefix=${TwoPiRoot}                 \
 	   --mfem-prefix-no-swig                 \
            --mfem-prefix=${TwoPiRoot}/mfem       \
            --mfemp-prefix=${TwoPiRoot}/mfem/par  \
@@ -128,6 +130,7 @@ if $DO_PARALLEL ;then
            --mfem-prefix-no-swig                        \
            --no-serial                                  \
            --with-parallel                              \
+           --prefix=${TwoPiRoot}                        \
            --mfem-prefix=${TwoPiRoot}/mfem              \
            --mfemp-prefix=${TwoPiRoot}/mfem/par         \
            --mfems-prefix=${TwoPiRoot}/mfem/ser         \
@@ -138,9 +141,10 @@ if $DO_PARALLEL ;then
 fi
 
 if $DO_DEFAULT ;then
-    ${PYTHON} setup.py install                             \
+    ${PYTHON} setup.py install                          \
            --mfem-prefix-no-swig                        \
            --with-parallel                              \
+           --prefix=${TwoPiRoot}                        \
            --mfem-prefix=${TwoPiRoot}/mfem              \
            --mfemp-prefix=${TwoPiRoot}/mfem/par         \
            --mfems-prefix=${TwoPiRoot}/mfem/ser         \
