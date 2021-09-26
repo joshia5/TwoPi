@@ -15,7 +15,6 @@ _usage() {
     
 }
 
-PYTHON ?= `which python`
 if [ -z "${PYTHON+xxx}" ]; then
     #echo "VAR is not set at all";
     PYTHON = `which python`

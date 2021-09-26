@@ -112,7 +112,6 @@ INTERPRETER=$(brew --prefix)/opt/python@3/bin/python3
 ALIAS_PISCOPE="alias piscope=\"${TwoPiRoot}/bin/piscope -e ${INTERPRETER}\""
 ALIAS_CIAO="alias ciao=\"echo Addio!;exit\""
 ALIAS_TWOPI="alias twopi=\"${TwoPiRoot}/TwoPi/bin/twopi\""
-ALIAS_PYTHON="alias python=python3"
 
 #Prompot
 # Note: Change color code based on following BASH colors
@@ -145,7 +144,6 @@ if [[ ${SHELL: (4)} == "/zsh" ]]; then
     echo "${ALIAS_PISCOPE}" >> $HOME/.zshrc_twopi/.zshrc
     echo "${ALIAS_CIAO}" >> $HOME/.zshrc_twopi/.zshrc
     echo "${ALIAS_TWOPI}" >> $HOME/.zshrc_twopi/.zshrc
-    echo "${ALIAS_PYTHON}" >> $HOME/.zshrc_twopi/.zshrc        
     ZDOTDIR=$HOME/.zshrc_twopi zsh
 else
     PPS1="("${TWOPIVER}")"
@@ -154,9 +152,9 @@ else
     PPS2="PS1=\"""${PPS1}""\""
 
     if [[ -f $HOME/.bashrc ]]; then
-        /bin/bash --rcfile  <(cat ~/.bashrc; echo "${PPS2}"; echo "${ALIAS_PISCOPE}"; echo "${ALIAS_CIAO}"; echo "${ALIAS_TWOPI}"; echo "${ALIAS_PYTHON}")
+        /bin/bash --rcfile  <(cat ~/.bashrc; echo "${PPS2}"; echo "${ALIAS_PISCOPE}"; echo "${ALIAS_CIAO}"; echo "${ALIAS_TWOPI}")
     else
-        /bin/bash --rcfile  <(echo "${PPS2}"; echo "${ALIAS_PISCOPE}"; echo "${ALIAS_CIAO}"; echo "${ALIAS_TWOPI}"; echo "${ALIAS_PYTHON}") 
+        /bin/bash --rcfile  <(echo "${PPS2}"; echo "${ALIAS_PISCOPE}"; echo "${ALIAS_CIAO}"; echo "${ALIAS_TWOPI}")
     fi
 fi    
 
