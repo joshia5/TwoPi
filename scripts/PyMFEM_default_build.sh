@@ -17,11 +17,11 @@ _usage() {
 
 if [ -z "${PYTHON+xxx}" ]; then
     #echo "VAR is not set at all";
-    PYTHON = `which python`
+    PYTHON=`which python`
 fi
 if [ -z "$PYTHON" ] && [ "${PYTHON+xxx}" = "xxx" ]; then
-    #echo "VAR is set but empty"; fi
-    PYTHON = `which python`
+    #echo "VAR is set but empty"; 
+    PYTHON=`which python`
 fi
 
 DO_SERIAL=false
