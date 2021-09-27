@@ -5,8 +5,8 @@ on:
     types:
       - created
 
-#jobs:
-#  update_formula_version:
+jobs:
+  update_formula_version:
 #    name: Update Homebrew formula
 #    runs-on: ubuntu-latest
 #    steps:
@@ -21,8 +21,8 @@ on:
 
 
 jobs:
-  update_formula_homebrew:
-    name: Update Homebrew formula
+  homebrew:
+    name: Bump Homebrew formula
     runs-on: ubuntu-latest
     steps:
       - name: Extract version
@@ -36,10 +36,40 @@ jobs:
           formula-path: twopi.rb
           homebrew-tap: piScope/homebrew-TwoPi
           base-branch: master
+          download-url: https://example.com/foo/${{ steps.extract-version.outputs.tag-name }}.tar.gz
           commit-message: |
             {{formulaName}} {{version}}
 
             Created by https://github.com/mislav/bump-homebrew-formula-action
         env:
-          COMMITTER_TOKEN: ${{ secrets.BREWRELEASETOKEN }}
-          # GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          COMMITTER_TOKEN: ${{ { secrets.BREWRELEASETOKEN }}
+
+  upload_bottle:
+    name: Build and distribute Homebrew bottle for macOS Catalina
+    runs-on: macos-10.15
+    needs: [update_formula_version]
+    steps:
+      #- uses: actions/checkout@v2
+      - name: Install-dependencies1
+        run: |
+            brew install cmake open-mpi scalapack wget zlib netcdf hdf5 numpy scipy coreutils llvm libomp gmsh wxPython mpi4py mercurial
+      - name: Install-dependencies2
+        run: |
+             $(brew --prefix)/opt/Python@3/bin/pip3 install six matplotlib Pillow hgapi PyOpenGL netCDF4 h5py PyPDF2 pdfrw future
+      - name: Build a bottle using Homebrew
+        run: |
+            brew tap piScope/twopi
+            brew install -v -s piscope/twopi/twopi --build-bottle --verbose hello
+            brew bottle piscope/twopi/twopi
+    
+      - name: Upload the bottle to the GitHub release
+        uses: actions/upload-release-asset@v1.0.1
+        env:
+          GH_PERSONAL_ACCESS_TOKEN: ${{ secrets.BREWRELEASETOKEN }}
+        with:
+          upload_url: ${{ github.event.release.upload_url }}
+          asset_path: ./twopi--${{ github.event.release.tag_name }}.catalina.bottle.tar.gz
+          asset_name: twopi-${{ github.event.release.tag_name }}.catalina.bottle.tar.gz
+          asset_content_type: application/gzip
+
+ 
