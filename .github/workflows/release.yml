@@ -36,7 +36,6 @@ jobs:
           formula-path: twopi.rb
           homebrew-tap: piScope/homebrew-TwoPi
           base-branch: master
-          download-url: https://example.com/foo/${{ steps.extract-version.outputs.tag-name }}.tar.gz
           commit-message: |
             {{formulaName}} {{version}}
 
