@@ -7,16 +7,39 @@ on:
 
 jobs:
   update_formula_version:
+#    name: Update Homebrew formula
+#    runs-on: ubuntu-latest
+#    steps:
+#      - name: Update the Homebrew formula with latest release
+#        uses: NSHipster/update-homebrew-formula-action@main
+#        with:
+#          repository: piScope/TwoPi
+#          tap: piScope/homebrew-TwoPi
+#          formula: twopi.rb
+#        env:
+#          GH_PERSONAL_ACCESS_TOKEN: ${{ secrets.BREWRELEASETOKEN }}
+
+
+jobs:
+  update_formula_homebrew:
     name: Update Homebrew formula
     runs-on: ubuntu-latest
     steps:
-      - name: Update the Homebrew formula with latest release
-        uses: NSHipster/update-homebrew-formula-action@main
+      - name: Extract version
+        id: extract-version
+        run: |
+          printf "::set-output name=%s::%s\n" tag-name "${GITHUB_REF#refs/tags/}"
+      - uses: mislav/bump-homebrew-formula-action@v1
+        if: "!contains(github.ref, '-')" # skip prereleases
         with:
-          repository: piScope/TwoPi
-          tap: piScope/homebrew-TwoPi
-          formula: twopi.rb
-        env:
-          GH_PERSONAL_ACCESS_TOKEN: ${{ secrets.BREWRELEASETOKEN }}
+          formula-name: twopi
+          formula-path: twopi.rb
+          homebrew-tap: piScope/homebrew-TwoPi
+          base-branch: master
+          commit-message: |
+            {{formulaName}} {{version}}
 
-  
+            Created by https://github.com/mislav/bump-homebrew-formula-action
+        env:
+          COMMITTER_TOKEN: ${{ secrets.COMMITTER_TOKEN }}
+          # GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
