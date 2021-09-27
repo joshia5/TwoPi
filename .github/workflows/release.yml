@@ -21,7 +21,7 @@ on:
 
 
 jobs:
-  homebrew:
+  update_formula_version:
     name: Bump Homebrew formula
     runs-on: ubuntu-latest
     steps:
