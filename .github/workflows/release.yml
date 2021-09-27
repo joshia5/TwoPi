@@ -58,7 +58,7 @@ jobs:
       - name: Build a bottle using Homebrew
         run: |
             brew tap piScope/twopi
-            brew install -v -s piscope/twopi/twopi --build-bottle --verbose hello
+            brew install -v piscope/twopi/twopi --build-bottle
             brew bottle piscope/twopi/twopi
     
       - name: Upload the bottle to the GitHub release
