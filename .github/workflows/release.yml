@@ -14,7 +14,7 @@ jobs:
         uses: NSHipster/update-homebrew-formula-action@main
         with:
           repository: piScope/TwoPi
-          tap: piScope/twopi
+          tap: piScope/homebrew-TwoPi
           formula: twopi.rb
         env:
           GH_PERSONAL_ACCESS_TOKEN: ${{ secrets.BREWRELEASETOKEN }}
