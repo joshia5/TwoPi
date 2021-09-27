@@ -17,4 +17,5 @@ jobs:
           tap: piScope/twopi
           formula: twopi.rb
         env:
-          GH_PERSONAL_ACCESS_TOKEN: ${{ secrets.BREWREASETOKEN }}
+          GH_PERSONAL_ACCESS_TOKEN: ${{ secrets.BREWRELEASETOKEN }}
+          GH_PERSONAL_ACCESS_TOKEN2: "hogehoge"
