@@ -5,8 +5,8 @@ on:
     types:
       - created
 
-jobs:
-  update_formula_version:
+#jobs:
+#  update_formula_version:
 #    name: Update Homebrew formula
 #    runs-on: ubuntu-latest
 #    steps:
