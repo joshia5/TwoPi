@@ -13,7 +13,7 @@ jobs:
       - name: Update the Homebrew formula with latest release
         uses: NSHipster/update-homebrew-formula-action@main
         with:
-          repository: piScopea/TwoPi
+          repository: piScope/TwoPi
           tap: piScope/twopi
           formula: twopi.rb
         env:
