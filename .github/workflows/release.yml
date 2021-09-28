@@ -13,7 +13,6 @@ permissions:
   deployments: read
   issues: read
   packages: read
-  repository projects: read
   statuses: read
   
 jobs:
