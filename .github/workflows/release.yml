@@ -12,7 +12,6 @@ permissions:
   checks: read
   deployments: read
   issues: read
-  metadata: read
   packages: read
   repository projects: read
   statuses: read
