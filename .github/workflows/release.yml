@@ -5,6 +5,10 @@ on:
     types:
       - created
 
+permissions:
+  contents: read
+  pull-requests: write
+  
 jobs:
   update_formula_version:
     name: Bump Homebrew formula
@@ -26,7 +30,8 @@ jobs:
 
             Created by https://github.com/mislav/bump-homebrew-formula-action
         env:
-          COMMITTER_TOKEN: ${{ secrets.BREWRELEASETOKEN }}
+          #COMMITTER_TOKEN: ${{ secrets.BREWRELEASETOKEN }}
+	  COMMITTER_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
 #  upload_bottle:
 #    name: Build and distribute Homebrew bottle for macOS Catalina
