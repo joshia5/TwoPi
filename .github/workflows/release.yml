@@ -48,22 +48,22 @@ jobs:
     runs-on: macos-10.15
     needs: [update_formula_version]
     steps:
-      #- uses: actions/checkout@v2
-      - name: Install-dependencies1
-        run: |
-            brew install cmake open-mpi scalapack wget zlib netcdf hdf5 numpy scipy coreutils llvm libomp gmsh wxPython mpi4py mercurial
-      - name: Install-dependencies2
-        run: |
-             $(brew --prefix)/opt/Python@3/bin/pip3 install six matplotlib Pillow hgapi PyOpenGL netCDF4 h5py PyPDF2 pdfrw future
-      - name: Build a bottle using Homebrew
-        run: |
-            brew tap piScope/twopi
-            brew install -v piscope/twopi/twopi --build-bottle
-            brew bottle piscope/twopi/twopi
-
+      #- name: Install-dependencies1
+      #  run: |
+      #      brew install cmake open-mpi scalapack wget zlib netcdf hdf5 numpy scipy coreutils llvm libomp gmsh wxPython mpi4py mercurial
+      #- name: Install-dependencies2
+      #  run: |
+      #       $(brew --prefix)/opt/Python@3/bin/pip3 install six matplotlib Pillow hgapi PyOpenGL netCDF4 h5py PyPDF2 pdfrw future
+      #- name: Build a bottle using Homebrew
+      #  run: |
+      #      brew tap piScope/twopi
+      #      brew install -v piscope/twopi/twopi --build-bottle
+      #      brew bottle piscope/twopi/twopi	    
       - name: Extact Version String
         run: |
           echo "TAG_VERSION=$(echo ${{github.event.release.tag_name}} | sed 's/[^0-9.]*//g')" >> $GITHUB_ENV
+          echo sample > sample_out.txt
+          tar -zcvf twopi--"${TAG_VERSION}".catalina.tar.gz  sample_out.txt
 
       - name: Upload the bottle to the GitHub release
         uses: actions/upload-release-asset@v1.0.1
