@@ -72,7 +72,7 @@ jobs:
         with:
           upload_url: ${{ github.event.release.upload_url }}
           asset_path: ./twopi--${{ env.TAG_VERSION }}.catalina.bottle.1.tar.gz
-          asset_name: twopi-${{ evn.TAG_VERSION }}.catalina.bottle.tar.gz
+          asset_name: twopi-${{ env.TAG_VERSION }}.catalina.bottle.tar.gz
           asset_content_type: application/gzip
 
  
