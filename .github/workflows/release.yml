@@ -12,10 +12,11 @@ permissions:
   checks: read
   deployments: read
   issues: read
+  discussions: read
   packages: read
   statuses: read
   security-events: read
-  #repository-projects: read
+  repository-projects: read
   
 jobs:
   update_formula_version:
