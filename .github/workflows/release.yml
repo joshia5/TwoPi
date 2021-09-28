@@ -5,21 +5,6 @@ on:
     types:
       - created
 
-#jobs:
-#  update_formula_version:
-#    name: Update Homebrew formula
-#    runs-on: ubuntu-latest
-#    steps:
-#      - name: Update the Homebrew formula with latest release
-#        uses: NSHipster/update-homebrew-formula-action@main
-#        with:
-#          repository: piScope/TwoPi
-#          tap: piScope/homebrew-TwoPi
-#          formula: twopi.rb
-#        env:
-#          GH_PERSONAL_ACCESS_TOKEN: ${{ secrets.BREWRELEASETOKEN }}
-
-
 jobs:
   update_formula_version:
     name: Bump Homebrew formula
@@ -43,11 +28,11 @@ jobs:
         env:
           COMMITTER_TOKEN: ${{ secrets.BREWRELEASETOKEN }}
 
-  upload_bottle:
-    name: Build and distribute Homebrew bottle for macOS Catalina
-    runs-on: macos-10.15
-    needs: [update_formula_version]
-    steps:
+#  upload_bottle:
+#    name: Build and distribute Homebrew bottle for macOS Catalina
+#    runs-on: macos-10.15
+#    needs: [update_formula_version]
+#    steps:
       #- name: Install-dependencies1
       #  run: |
       #      brew install cmake open-mpi scalapack wget zlib netcdf hdf5 numpy scipy coreutils llvm libomp gmsh wxPython mpi4py mercurial
@@ -59,20 +44,18 @@ jobs:
       #      brew tap piScope/twopi
       #      brew install -v piscope/twopi/twopi --build-bottle
       #      brew bottle piscope/twopi/twopi	    
-      - name: Extact Version String
-        run: |
-          echo "TAG_VERSION=$(echo ${{github.event.release.tag_name}} | sed 's/[^0-9.]*//g')" >> $GITHUB_ENV
-          echo sample > sample_out.txt
-          tar -zcvf twopi--"${TAG_VERSION}".catalina.1.tar.gz  sample_out.txt
+#      - name: Extact Version String
+#        run: |
+#          echo "TAG_VERSION=$(echo ${{github.event.release.tag_name}} | sed 's/[^0-9.]*//g')" >> $GITHUB_ENV
 
-      - name: Upload the bottle to the GitHub release
-        uses: actions/upload-release-asset@v1.0.1
-        env:
-          GITHUB_TOKEN: ${{ secrets.BREWRELEASETOKEN }}
-        with:
-          upload_url: ${{ github.event.release.upload_url }}
-          asset_path: ./twopi--${{ env.TAG_VERSION }}.catalina.bottle.1.tar.gz
-          asset_name: twopi-${{ env.TAG_VERSION }}.catalina.bottle.tar.gz
-          asset_content_type: application/gzip
+#      - name: Upload the bottle to the GitHub release
+#        uses: actions/upload-release-asset@v1.0.1
+#        env:
+#          GITHUB_TOKEN: ${{ secrets.BREWRELEASETOKEN }}
+#        with:
+#          upload_url: ${{ github.event.release.upload_url }}
+#          asset_path: ./twopi--${{ env.TAG_VERSION }}.catalina.bottle.1.tar.gz
+#          asset_name: twopi-${{ env.TAG_VERSION }}.catalina.bottle.tar.gz
+#          asset_content_type: application/gzip
 
  
