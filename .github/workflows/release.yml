@@ -60,15 +60,19 @@ jobs:
             brew tap piScope/twopi
             brew install -v piscope/twopi/twopi --build-bottle
             brew bottle piscope/twopi/twopi
-    
+
+      - name: Extact Version String
+         run: |
+           echo "TAG_VERSION=$(echo ${{github.event.release.tag_name}} | sed 's/[^0-9.]*//g')" >> $GITHUB_ENV
+
       - name: Upload the bottle to the GitHub release
         uses: actions/upload-release-asset@v1.0.1
         env:
-          GH_PERSONAL_ACCESS_TOKEN: ${{ secrets.BREWRELEASETOKEN }}
+          GITHUB_TOKEN: ${{ secrets.BREWRELEASETOKEN }}
         with:
           upload_url: ${{ github.event.release.upload_url }}
-          asset_path: ./twopi--${{ github.event.release.tag_name }}.catalina.bottle.tar.gz
-          asset_name: twopi-${{ github.event.release.tag_name }}.catalina.bottle.tar.gz
+          asset_path: ./twopi--${{ env.TAG_VERSION }}.catalina.bottle.1.tar.gz
+          asset_name: twopi-${{ evn.TAG_VERSION }}.catalina.bottle.tar.gz
           asset_content_type: application/gzip
 
  
