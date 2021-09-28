@@ -63,7 +63,7 @@ jobs:
         run: |
           echo "TAG_VERSION=$(echo ${{github.event.release.tag_name}} | sed 's/[^0-9.]*//g')" >> $GITHUB_ENV
           echo sample > sample_out.txt
-          tar -zcvf twopi--"${TAG_VERSION}".catalina.tar.gz  sample_out.txt
+          tar -zcvf twopi--"${TAG_VERSION}".catalina.1.tar.gz  sample_out.txt
 
       - name: Upload the bottle to the GitHub release
         uses: actions/upload-release-asset@v1.0.1
