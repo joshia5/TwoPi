@@ -5,18 +5,17 @@ on:
     types:
       - created
 
-permissions: read-all
+permissions: 
   pull-requests: write
-
-#contents: read
-#actions: read
-#checks: read
-#deployments: read
-#issues: read
-#packages: read
-#statuses: read
-#security-events: read
-#repository-projects: read
+  contents: read
+  actions: read
+  checks: read
+  deployments: read
+  issues: read
+  packages: read
+  statuses: read
+  security-events: read
+  #repository-projects: read
   
 jobs:
   update_formula_version:
