@@ -31,7 +31,7 @@ jobs:
             Created by https://github.com/mislav/bump-homebrew-formula-action
         env:
           #COMMITTER_TOKEN: ${{ secrets.BREWRELEASETOKEN }}
-	  COMMITTER_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          COMMITTER_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
 #  upload_bottle:
 #    name: Build and distribute Homebrew bottle for macOS Catalina
