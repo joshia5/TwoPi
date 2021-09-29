@@ -1,3 +1,6 @@
+#
+#  This FW update SHA and create a new PR in homebrew-TwoPi
+#
 name: Release
 
 on:
@@ -21,36 +24,10 @@ jobs:
         run: |	
           echo ${{github.event.release.tag_name}}
           SRC_URL="https://github.com/piScope/TwoPi/archive/refs/tags/"${{github.event.release.tag_name}}".tar.gz"
-          echo "${SRC_URL}"
           printf "protocol=https\nhost=github.com\n" | git credential-osxkeychain erase
           export HOMEBREW_GITHUB_API_TOKEN=${{ secrets.BREWRELEASETOKEN }}
           brew tap piScope/twopi
-          cd $(brew --repo piscope/twopi)	  
-          #git config --global user.name "${GITHUB_ACTOR}"
-          git remote get-url --push origin
-          #git remote set-url origin https://x-access-token:${{ secrets.BREWRELEASETOKEN }}@github.com/piScope/twopi
-          #brew bump-formula-pr --force --no-browse --no-audit --url "${SRC_URL}" piscope/twopi/twopi
           brew bump-formula-pr -f -d -v  --no-browse --no-audit --url "${SRC_URL}" piscope/twopi/twopi
-
-#    steps:
-#      - name: Extract version
-#        id: extract-version
-#        run: |
-#          printf "::set-output name=%s::%s\n" tag-name "${GITHUB_REF#refs/tags/}"
-#      - uses: mislav/bump-homebrew-formula-action@v1
-#        if: "!contains(github.ref, '-')" # skip prereleases
-#        with:
-#          formula-name: twopi
-#          formula-path: twopi.rb
-#          homebrew-tap: piScope/homebrew-TwoPi
-#          base-branch: master
-#          commit-message: |
-#            {{formulaName}} {{version}}
-#
-#            Created by https://github.com/mislav/bump-homebrew-formula-action
-#        env:
-#          #COMMITTER_TOKEN: ${{ secrets.BREWRELEASETOKEN }}
-#          COMMITTER_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
 #  upload_bottle:
 #    name: Build and distribute Homebrew bottle for macOS Catalina
