@@ -22,7 +22,7 @@ jobs:
           echo "${SRC_URL}"
           export HOMEBREW_GITHUB_API_TOKEN=${{ secrets.HB_TOKEN_SS }}
           brew tap piScope/twopi	
-          brew bump-formula-pr --no-browse --no-audit --url "${SRC_URL}" piscope/twopi/twopi
+          brew bump-formula-pr --force --no-browse --no-audit --url "${SRC_URL}" piscope/twopi/twopi
 
 #    steps:
 #      - name: Extract version
