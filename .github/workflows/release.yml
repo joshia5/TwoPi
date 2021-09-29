@@ -13,7 +13,7 @@ jobs:
       - name: Set up Homebrew
         id: set-up-homebrew
         uses: Homebrew/actions/setup-homebrew@master
-	
+
       - name: bump-formula-pr
 #        if: "!contains(github.ref, '-')" # skip prereleases (uncomment this later)
         run: |
