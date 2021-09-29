@@ -8,7 +8,7 @@ on:
 jobs:
   update_formula_version:
     name: Bump Homebrew formula
-    runs-on: macos-latest
+    runs-on: ubuntu-latest
     steps:
       - name: Set up Homebrew
         id: set-up-homebrew
