@@ -17,7 +17,7 @@ jobs:
       - name: bump-formula-pr
 #        if: "!contains(github.ref, '-')" # skip prereleases (uncomment this later)
         run: |
-	  echo ${{github.event.release.tag_name}}
+          echo ${{github.event.release.tag_name}}
           echo "SRC_URL=$(echo https://github.com/piScope/TwoPi/archive/refs/tags/${{github.event.release.tag_name}}.tar.gz ) >> $GITHUB_ENV	  
           export HOMEBREW_GITHUB_API_TOKEN=${{ secrets.HB_TOKEN_SS }}
           brew tap piScope/twopi	
