@@ -18,7 +18,7 @@ jobs:
 #        if: "!contains(github.ref, '-')" # skip prereleases (uncomment this later)
         run: |
           echo ${{github.event.release.tag_name}}
-	  SRC_URL="https://github.com/piScope/TwoPi/archive/refs/tags/"${{github.event.release.tag_name}}".tar.gz"
+          SRC_URL="https://github.com/piScope/TwoPi/archive/refs/tags/"${{github.event.release.tag_name}}".tar.gz"
           echo "${SRC_URL}"
           export HOMEBREW_GITHUB_API_TOKEN=${{ secrets.HB_TOKEN_SS }}
           brew tap piScope/twopi	
