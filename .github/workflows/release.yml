@@ -23,7 +23,7 @@ jobs:
           export HOMEBREW_GITHUB_API_TOKEN=${{ secrets.HB_TOKEN_SS }}
           brew tap piScope/twopi
           echo ${GITHUB_ACTOR}
-	  echo ${{ github.actor }}
+          echo ${{ github.actor }}
           cd $(brew --repo piscope/twopi)	  
           git config --global user.name "${GITHUB_ACTOR}"
           git remote get-url --push origin
