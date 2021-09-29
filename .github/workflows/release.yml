@@ -4,43 +4,44 @@ on:
   release:
     types:
       - created
-
-permissions: 
-  pull-requests: write
-  contents: read
-  actions: read
-  checks: read
-  deployments: read
-  issues: read
-  discussions: read
-  packages: read
-  statuses: read
-  security-events: read
-  repository-projects: read
   
 jobs:
   update_formula_version:
     name: Bump Homebrew formula
-    runs-on: ubuntu-latest
+    runs-on: macos-latest
     steps:
-      - name: Extract version
-        id: extract-version
+      - name: Set up Homebrew
+        id: set-up-homebrew
+        uses: Homebrew/actions/setup-homebrew@master
+	
+      - name: bump-formula-pr
+#        if: "!contains(github.ref, '-')" # skip prereleases (uncomment this later)
         run: |
-          printf "::set-output name=%s::%s\n" tag-name "${GITHUB_REF#refs/tags/}"
-      - uses: mislav/bump-homebrew-formula-action@v1
-        if: "!contains(github.ref, '-')" # skip prereleases
-        with:
-          formula-name: twopi
-          formula-path: twopi.rb
-          homebrew-tap: piScope/homebrew-TwoPi
-          base-branch: master
-          commit-message: |
-            {{formulaName}} {{version}}
+	  echo ${{github.event.release.tag_name}}
+          echo "SRC_URL=$(echo https://github.com/piScope/TwoPi/archive/refs/tags/${{github.event.release.tag_name}}.tar.gz ) >> $GITHUB_ENV	  
+          export HOMEBREW_GITHUB_API_TOKEN=${{ secrets.HB_TOKEN_SS }}
+          brew tap piScope/twopi	
+          brew bump-formula-pr --no-browse --no-audit --url ${{ env.SRC_URL }} piscope/twopi/twopi
 
-            Created by https://github.com/mislav/bump-homebrew-formula-action
-        env:
-          #COMMITTER_TOKEN: ${{ secrets.BREWRELEASETOKEN }}
-          COMMITTER_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+#    steps:
+#      - name: Extract version
+#        id: extract-version
+#        run: |
+#          printf "::set-output name=%s::%s\n" tag-name "${GITHUB_REF#refs/tags/}"
+#      - uses: mislav/bump-homebrew-formula-action@v1
+#        if: "!contains(github.ref, '-')" # skip prereleases
+#        with:
+#          formula-name: twopi
+#          formula-path: twopi.rb
+#          homebrew-tap: piScope/homebrew-TwoPi
+#          base-branch: master
+#          commit-message: |
+#            {{formulaName}} {{version}}
+#
+#            Created by https://github.com/mislav/bump-homebrew-formula-action
+#        env:
+#          #COMMITTER_TOKEN: ${{ secrets.BREWRELEASETOKEN }}
+#          COMMITTER_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
 #  upload_bottle:
 #    name: Build and distribute Homebrew bottle for macOS Catalina
