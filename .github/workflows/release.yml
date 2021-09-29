@@ -17,11 +17,14 @@ jobs:
       - name: bump-formula-pr
 #        if: "!contains(github.ref, '-')" # skip prereleases (uncomment this later)
         run: |
+	
           echo ${{github.event.release.tag_name}}
           SRC_URL="https://github.com/piScope/TwoPi/archive/refs/tags/"${{github.event.release.tag_name}}".tar.gz"
           echo "${SRC_URL}"
           export HOMEBREW_GITHUB_API_TOKEN=${{ secrets.HB_TOKEN_SS }}
-          brew tap piScope/twopi	
+          brew tap piScope/twopi
+	  echo ${GITHUB_ACTOR}
+          git config --global user.name "${GITHUB_ACTOR}"
           #brew bump-formula-pr --force --no-browse --no-audit --url "${SRC_URL}" piscope/twopi/twopi
           brew bump-formula-pr -f -d -v --no-fork --no-browse --no-audit --url "${SRC_URL}" piscope/twopi/twopi
 
