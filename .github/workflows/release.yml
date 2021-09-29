@@ -26,7 +26,7 @@ jobs:
 	  echo ${{ github.actor }}
           cd $(brew --repo piscope/twopi)	  
           git config --global user.name "${GITHUB_ACTOR}"
-	  git remote get-url --push origin
+          git remote get-url --push origin
           #brew bump-formula-pr --force --no-browse --no-audit --url "${SRC_URL}" piscope/twopi/twopi
           brew bump-formula-pr -f -d -v --no-fork --no-browse --no-audit --url "${SRC_URL}" piscope/twopi/twopi
 
