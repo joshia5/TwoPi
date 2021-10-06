@@ -17,7 +17,8 @@ _usage() {
     echo '   options: --debug (add -g)'
     echo '   options: --O0    (-O3 is replace to -O0)'
     echo '   options: --O1    (-O3 is replace to -O1)'
-    echo '   options: --O2    (-O3 is replace to -O2)'    
+    echo '   options: --O2    (-O3 is replace to -O2)'
+    echo '   options: --test  (run test)'
 }
 
 
@@ -28,6 +29,7 @@ _USE_DEBUG="OFF"
 _USE_O0="OFF"
 _USE_O1="OFF"
 _USE_O2="OFF"
+_DO_TEST="OFF"
 while [[ $# -gt 0 ]]
 do
 key="$1"
@@ -60,6 +62,10 @@ case $key in
     _USE_O0="ON"	
     shift # past param
     ;;
+    --test)
+    _DO_TEST="ON"
+    shift # past param
+    ;;
     --help)
     _usage
     exit 1
@@ -79,6 +85,14 @@ echo "MPI include path: "$MPI_INCLUDE_PATH
 
 MYPATH=$BASH_SOURCE
 echo $MYPATH
+
+if [[ "${_DO_TEST}" == "ON" ]]; then
+    cd ${REPO}/src
+    CCD="$CC -I$MPI_INCLUDE_PATH"
+    $MAKE check CCS="$CC" CCP="$MPICC" CCD="$CCD"
+    $MAKE ptcheck CCS="$CC" CCP="$MPICC" CCD="$CCD"
+    exit 0
+fi
 
 MAKEINC=$(dirname "$MYPATH")/../extra/scotch/scotch_${TwoPiDevice}_Makefile.inc
 if [ ! -f $MAKEINC ]; then
