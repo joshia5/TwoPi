@@ -10,7 +10,7 @@ source $SCRIPT
 mkdir -p $SRCDIR
 cd $SRCDIR
 wget https://gitlab.inria.fr/scotch/scotch/-/archive/v${SCOTCH_VERSION}/scotch-v${SCOTCH_VERSION}.tar.gz
-tar -zxvf scotch_${SCOTCH_VERSION}.tar.gz
-rm scotch_${SCOTCH_VERSION}.tar.gz
+tar -zxvf scotch_v${SCOTCH_VERSION}.tar.gz
+rm scotch_v${SCOTCH_VERSION}.tar.gz
 
 
