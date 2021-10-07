@@ -9,7 +9,7 @@ source $SCRIPT
 
 mkdir -p $SRCDIR
 cd $SRCDIR
-wget https://gforge.inria.fr/frs/download.php/file/${SCOTCH_DL}/scotch_${SCOTCH_VERSION}.tar.gz
+wget https://gitlab.inria.fr/scotch/scotch/-/archive/v${SCOTCH_VERSION}/scotch-v${SCOTCH_VERSION}.tar.gz
 tar -zxvf scotch_${SCOTCH_VERSION}.tar.gz
 rm scotch_${SCOTCH_VERSION}.tar.gz
 

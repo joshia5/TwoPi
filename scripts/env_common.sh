@@ -25,10 +25,7 @@ MUMPS_VERSION=5.3.4
 MUMPS_REPO=MUMPS_${MUMPS_VERSION}
 
 # SCOTCH
-#    SCOTCH_DL is encoded in the download link.
-#    It needs to be updated when updating scotch version
-SCOTCH_DL=38352
-SCOTCH_VERSION=6.1.0
+SCOTCH_VERSION=6.1.1
 
 # Lapack
 LAPACK_VERSION=3.9.0
