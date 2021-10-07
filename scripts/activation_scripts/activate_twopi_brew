@@ -81,11 +81,13 @@ export PATH=$TwoPiRoot/bin:$PATH
 
 export TwoPiGit=git@github.com:piScope
 
+PYTHONVERSION=3.9
+
 GMSHLIB=$(dirname $(dirname $(dirname $(which gmsh))/$(readlink $(which gmsh))))/lib
-WXLIB=/usr/local/opt/wxpython/libexec/lib/python3.8/site-packages/
+WXLIB=/usr/local/opt/wxpython/libexec/lib/python${PYTHONVERSION}/site-packages/
 export PYTHONPATH=$WXLIB:$GMSHLIB:$PYTHONPATH
 
-PYTHONVERSION=3.8
+
 
 PYTHONLIB1=$TwoPiRoot/lib/python${PYTHONVERSION}
 mkdir -p $PYTHONLIB1/site-packages
@@ -98,13 +100,12 @@ else
 fi
 
 LLVMBIN=$(brew --prefix)/opt/llvm/bin
-PYTHONBIN=$(brew --prefix)/opt/python@3.8/bin
+PYTHONBIN=$(brew --prefix)/opt/python@3/bin
 
-export PATH=$LLVMLIB:$PYTHONBIN:$PATH
-
+export PATH=$LLVMBIN:$PYTHONBIN:$PATH
 # this is necessary to luanch piScope with proper framework enviroment
 
-INTERPRETER=$(brew --prefix)/opt/python@3.8/bin/python3
+INTERPRETER=$(brew --prefix)/opt/python@3/bin/python3
 
 # define two alias as text 
 ALIAS_PISCOPE="alias piscope=\"${TwoPiRoot}/bin/piscope -e ${INTERPRETER}\""
@@ -129,7 +130,7 @@ ALIAS_TWOPI="alias twopi=\"${TwoPiRoot}/TwoPi/bin/twopi\""
 
 echo "starting ..." ${SHELL}
 if [[ ${SHELL: (4)} == "/zsh" ]]; then
-    PPS1="("${TWOPIVER}")""%n@%m %1~ %# "
+    PPS1="%B%{%F{green}%}""("${TWOPIVER}")""%b%{%F{black}%}""%n@%m ""%B%{%F{blue}%}""%1~ ""%b%{%F{black}%}""%# "    
     PPS2="PS1=\"""${PPS1}""\""
     
     RC=""
@@ -150,9 +151,9 @@ else
     PPS2="PS1=\"""${PPS1}""\""
 
     if [[ -f $HOME/.bashrc ]]; then
-        /bin/bash --rcfile  <(cat ~/.bashrc; echo "${PPS2}"; echo "${ALIAS_PISCOPE}"; echo "${ALIAS_CIAO}"; echo "${ALIAS_TWOPI}")    	
+        /bin/bash --rcfile  <(cat ~/.bashrc; echo "${PPS2}"; echo "${ALIAS_PISCOPE}"; echo "${ALIAS_CIAO}"; echo "${ALIAS_TWOPI}")
     else
-        /bin/bash --rcfile  <(echo "${PPS2}"; echo "${ALIAS_PISCOPE}"; echo "${ALIAS_CIAO}"; echo "${ALIAS_TWOPI}")    	
+        /bin/bash --rcfile  <(echo "${PPS2}"; echo "${ALIAS_PISCOPE}"; echo "${ALIAS_CIAO}"; echo "${ALIAS_TWOPI}")
     fi
 fi    
 
