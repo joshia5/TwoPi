@@ -91,7 +91,7 @@ RANLIB = ranlib
 
 #SCALAP = -lscalapack
 #INCPAR = -I/usr/lib/openmpi/include
-INCPAR = ""
+INCPAR = 
 LIBPAR = $(SCALAP) 
 
 INCSEQ = -I$(topdir)/libseq
