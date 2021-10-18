@@ -17,7 +17,7 @@ OCC_INSTALL_DIR=$(python -c "from distutils.sysconfig import get_python_lib; imp
 
 # if TwoPi has OOC installed use it otherwise defualt
 if [  -d ${TwoPiRoot}/include/opencascade ]; then
-    OCC_HEADER=${TwoPiRoot}/include/opencascade 
+    OCC_HEADER=${TwoPiRoot}/include/opencascade
     OCC_LIB=${TwoPiRoot}/lib
 else
     OCC_HEADER=/usr/local/include/opencascade
@@ -31,6 +31,7 @@ echo "OCC lib    :"${OCC_LIB}
 mkdir -p $REPO/cmbuild
 cd $REPO/cmbuild
 $CMAKE .. -DCMAKE_INSTALL_PREFIX=${TwoPiRoot}     \
+          -DCMAKE_CXX_STANDARD_INCLUDE_DIRECTORIES=${TwoPiRoot}/include \       
           -DCMAKE_INSTALL_RPATH=${TwoPiRoot}      \
           -DOCE_INCLUDE_PATH=${OCC_HEADER}        \
           -DOCE_LIB_PATH=${OCC_LIB}               \
