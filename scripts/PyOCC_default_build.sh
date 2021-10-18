@@ -28,10 +28,16 @@ fi
 echo "OCC header :"${OCC_HEADER}
 echo "OCC lib    :"${OCC_LIB}
 
+FILE=$REPO/src/SWIG_files/wrapper/ShapeUpgrade.i
+
+echo "PATCHING :"${FILE}
+${PYTHON} -c "txt=open('${FILE}').read().replace('#include<Precision.hxx>', '#include<Precision.hxx>\n#include<TopoDS_Edge.hxx>');fid=open('${FILE}', 'w');fid.write(txt)"
+
 mkdir -p $REPO/cmbuild
 cd $REPO/cmbuild
+
 $CMAKE .. -DCMAKE_INSTALL_PREFIX=${TwoPiRoot}     \
-          -DCMAKE_CXX_STANDARD_INCLUDE_DIRECTORIES=${TwoPiRoot}/include \       
+          -DCMAKE_CXX_STANDARD_INCLUDE_DIRECTORIES=${TwoPiRoot}/include \
           -DCMAKE_INSTALL_RPATH=${TwoPiRoot}      \
           -DOCE_INCLUDE_PATH=${OCC_HEADER}        \
           -DOCE_LIB_PATH=${OCC_LIB}               \
