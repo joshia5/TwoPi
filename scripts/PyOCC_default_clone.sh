@@ -36,11 +36,13 @@ case $key in
     DO_LATEST=false
     shift # past argument
     shift # past param
+    ;;
     --75)
     SHA=5b38e1eae3e9d69f1d81280f70f0e4e8a385ad14	 
     DO_LATEST=false
     shift # past argument
     shift # past param
+    ;;
 esac
 done
 
