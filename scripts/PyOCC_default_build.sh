@@ -13,7 +13,7 @@ if [ ! -d ${REPO} ];then
     exit 1
 fi
 
-OCC_INSTALL_DIR=$(python -c "from distutils.sysconfig import get_python_lib; import os;print(get_python_lib())")
+OCC_INSTALL_DIR=$(${PYTHON} -c "from distutils.sysconfig import get_python_lib; import os;print(get_python_lib())")
 
 # if TwoPi has OOC installed use it otherwise defualt
 if [  -d ${TwoPiRoot}/include/opencascade ]; then
