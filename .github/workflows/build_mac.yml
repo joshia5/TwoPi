@@ -24,7 +24,7 @@ jobs:
       - uses: actions/checkout@v2
       - name: install-dependencies1
         run: |
-            brew install cmake open-mpi scalapack wget zlib netcdf hdf5 numpy scipy coreutils llvm libomp gmsh wxPython mpi4py mercurial rapidjason
+            brew install cmake open-mpi scalapack wget zlib netcdf hdf5 numpy scipy coreutils llvm libomp gmsh wxPython mpi4py mercurial rapidjson
       - name: install-dependencies2
         run: |
              $(brew --prefix)/opt/Python@3/bin/pip3 install six matplotlib Pillow hgapi PyOpenGL netCDF4 h5py PyPDF2 pdfrw future
