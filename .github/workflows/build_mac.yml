@@ -32,11 +32,17 @@ jobs:
         run: |
            mkdir ${PWD}/twopi_root
            mkdir ${PWD}/log
-           export TwoPiRoot=${PWD}/twopi_root
-           export TwoPiDevice=brew
-           export PYTHON=$(brew --prefix)/opt/python@3.9/bin/python3
+           echo "TwoPiRoot=${PWD}/twopi_root" >> $GITHUB_ENV
+           echo "TwoPiDevice=brew" >> $GITHUB_ENV
+           echo "PYTHONBIN=$(brew --prefix)/opt/python@3.9/bin/python3" >> $GITHUB_ENV	   	   	   
       - name: install-packages
+        env:
+          TwoPiRoot: ${{ github.TwoPiRoot }}
+          TwoPiDevice: ${{ github.TwoPiDevice }}
+          PYTHON: ${{ github.PYTHONBIN }}		  
         run: |
            ls -l
-           ./bin/twopi install modules --no-occ-gmsh --no-python_mod --log-dir ${PWD}/log
+           echo $TwoPiDevice
+           echo $TwoPiRoot	   
+           #./bin/twopi install modules --no-occ-gmsh --no-python_mod --log-dir ${PWD}/log
 
