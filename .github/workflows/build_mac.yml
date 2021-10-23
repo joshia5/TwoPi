@@ -30,10 +30,13 @@ jobs:
            $(brew --prefix)/opt/Python@3/bin/pip3 install six matplotlib Pillow hgapi PyOpenGL netCDF4 h5py PyPDF2 pdfrw future
       - name: setup twopi
         run: |
-           mkdir TwoPiRoot=${PWD}/twopi_root
+           mkdir ${PWD}/twopi_root
+           mkdir ${PWD}/log
            export TwoPiRoot=${PWD}/twopi_root
            export TwoPiDevice=brew
            export PYTHON=$(brew --prefix)/opt/python@3.9/bin/python3
       - name: install-packages
         run: |
-            #brew install -v -s piscope/twopi/twopi 
+	   ls -l
+           ./bin/twopi install modules --no-occ-gmsh --no-python_mod --log-dir ${PWD}/log
+
