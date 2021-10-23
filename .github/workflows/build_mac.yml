@@ -44,5 +44,5 @@ jobs:
            ls -l
            echo $TwoPiDevice
            echo $TwoPiRoot	   
-           #./bin/twopi install modules --no-occ-gmsh --no-python_mod --log-dir ${PWD}/log
+           ./bin/twopi install modules --no-occ-gmsh --no-python_mod --log-dir ${PWD}/log
 
