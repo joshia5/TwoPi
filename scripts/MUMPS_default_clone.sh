@@ -10,6 +10,7 @@ source $SCRIPT
 mkdir -p $SRCDIR
 cd $SRCDIR
 wget http://mumps.enseeiht.fr/MUMPS/MUMPS_${MUMPS_VERSION}.tar.gz
+
 tar -zxvf MUMPS_${MUMPS_VERSION}.tar.gz
 rm MUMPS_${MUMPS_VERSION}.tar.gz
 
