@@ -37,9 +37,9 @@ jobs:
            echo "PYTHONBIN=$(brew --prefix)/opt/python@3.9/bin/python3" >> $GITHUB_ENV	   	   	   
       - name: install-packages
         env:
-          TwoPiRoot: ${{ github.TwoPiRoot }}
-          TwoPiDevice: ${{ github.TwoPiDevice }}
-          PYTHON: ${{ github.PYTHONBIN }}		  
+          TwoPiRoot: ${{ env.TwoPiRoot }}
+          TwoPiDevice: ${{ env.TwoPiDevice }}
+          PYTHON: ${{ env.PYTHONBIN }}		  
         run: |
            ls -l
            echo $TwoPiDevice
