@@ -119,10 +119,10 @@ else
 fi
 
 if [[ "$NO_PYOCC" -eq "1" ]]; then
+    echo skiping PyOCC    
+else
     echo Installing PyOCC
     $TWOPI install PyOCC | tee $LOGDIR/PyOCC.log
-else
-    echo skiping PyOCC
 fi
 
 echo Installing hypre
