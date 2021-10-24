@@ -51,5 +51,6 @@ jobs:
            echo $TwoPiRoot
            echo $TwoPiGit
            echo $PATH
+           ls /usr/local/bin   
            ./bin/twopi install modules --no-occ-gmsh --no-python_mod --no-pyocc --log-dir ${PWD}/log
 
