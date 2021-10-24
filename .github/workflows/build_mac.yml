@@ -31,7 +31,8 @@ jobs:
       - name: setup twopi
         run: |
            mkdir ${PWD}/twopi_root
-           mkdir ${PWD}/twopi_root/bin	   
+           mkdir ${PWD}/twopi_root/bin
+           mkdir ${PWD}/twopi_root/include	   
            mkdir ${PWD}/log
            echo "TwoPiRoot=${PWD}/twopi_root" >> $GITHUB_ENV
            echo "TwoPiDevice=brew" >> $GITHUB_ENV
