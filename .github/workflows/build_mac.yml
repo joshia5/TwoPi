@@ -31,6 +31,7 @@ jobs:
       - name: setup twopi
         run: |
            mkdir ${PWD}/twopi_root
+           mkdir ${PWD}/twopi_root/bin	   
            mkdir ${PWD}/log
            echo "TwoPiRoot=${PWD}/twopi_root" >> $GITHUB_ENV
            echo "TwoPiDevice=brew" >> $GITHUB_ENV
@@ -46,6 +47,7 @@ jobs:
           PYTHON: ${{ env.PYTHONBIN }}
           PATH: ${{ env.MYPATH }}
         run: |
+           echo $PWD
            ls -l
            echo $TwoPiDevice
            echo $TwoPiRoot
