@@ -51,6 +51,7 @@ jobs:
            echo $TwoPiRoot
            echo $TwoPiGit
            echo $PATH
-           ls /usr/local/bin   
+           ln -s /usr/local/bin/gfortran-11 $TwoPiRoot/bin/gfortran
+	   which gfortran
            ./bin/twopi install modules --no-occ-gmsh --no-python_mod --no-pyocc --log-dir ${PWD}/log
 
