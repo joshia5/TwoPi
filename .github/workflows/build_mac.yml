@@ -55,7 +55,8 @@ jobs:
            echo $TwoPiDevice
            echo $TwoPiRoot
            echo $TwoPiGit
-           echo $PATH
+           echo "PATH: "$PATH
+           export CXXFLAGS="-I /usr/local/include"
            ./bin/twopi clone PyOCC --75
            ./bin/twopi build PyOCC
       - name: install-packages(Rest)
