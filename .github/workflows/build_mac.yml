@@ -54,8 +54,8 @@ jobs:
            echo $TwoPiRoot
            echo $TwoPiGit
            echo $PATH
-           ./bin/twopi clone PyOCC
-           ./bin/twopi build PyOCC --75
+           ./bin/twopi clone PyOCC --75
+           ./bin/twopi build PyOCC
       - name: install-packages(Rest)
         env:
           TwoPiRoot: ${{ env.TwoPiRoot }}
