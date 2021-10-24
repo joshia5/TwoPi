@@ -35,17 +35,21 @@ jobs:
            echo "TwoPiRoot=${PWD}/twopi_root" >> $GITHUB_ENV
            echo "TwoPiDevice=brew" >> $GITHUB_ENV
            echo "TwoPiGit=https://github.com/piScope" >> $GITHUB_ENV
+           PP=$(brew --prefix)/bin:$(brew --prefix)/opt/llvm/bin:$(brew --prefix)/opt/python@3.9/bin:$PATH
+           echo "MYPATH=${PP}" >> $GITHUB_ENV	   
            echo "PYTHONBIN=$(brew --prefix)/opt/python@3.9/bin/python3" >> $GITHUB_ENV	   	   	   
       - name: install-packages
         env:
           TwoPiRoot: ${{ env.TwoPiRoot }}
           TwoPiDevice: ${{ env.TwoPiDevice }}
           TwoPiGit: ${{ env.TwoPiGit }}	  
-          PYTHON: ${{ env.PYTHONBIN }}		  
+          PYTHON: ${{ env.PYTHONBIN }}
+          PATH: ${{ env.MYPATH }}
         run: |
            ls -l
            echo $TwoPiDevice
            echo $TwoPiRoot
-           echo $TwoPiGit	   
+           echo $TwoPiGit
+           echo $PATH
            ./bin/twopi install modules --no-occ-gmsh --no-python_mod --no-pyocc --log-dir ${PWD}/log
 
