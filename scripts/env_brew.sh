@@ -30,5 +30,6 @@ OMPFCFLAG=-fopenmp
 #OMPFCFLAG=-fopenmp
 #export PATH=/usr/local/opt/llvm/bin:$PATH
 
+MAKEOPT="-j "$(python -c "import multiprocessing as mp;print(mp.cpu_count())")
 echo "$0" $0
 source $(dirname $BASH_SOURCE)/env_common.sh
