@@ -13,7 +13,9 @@ if [ ! -d ${REPO} ];then
     exit 1
 fi
 
-OCC_INSTALL_DIR=$(${PYTHON} -c "from distutils.sysconfig import get_python_lib; import os;print(get_python_lib())")
+#OCC_INSTALL_DIR=$(${PYTHON} -c "from distutils.sysconfig import get_python_lib; import os;print(get_python_lib())")
+OCC_INSTALL_DIR=$(${PYTHON} -c "from sysconfig import get_path;x=get_path('purelib');import os;print(os.path.basename(os.path.dirname(x)))")
+OCC_INSTALL_DIR=${TwoPiRoot}/lib/${OCC_INSTALL_DIR}/site-packages/OCC
 
 # if TwoPi has OOC installed use it otherwise defualt
 if [  -d ${TwoPiRoot}/include/opencascade ]; then
@@ -47,7 +49,7 @@ $CMAKE .. -DCMAKE_INSTALL_PREFIX=${TwoPiRoot}     \
           -DOCE_LIB_PATH=${OCC_LIB}               \
           -DCMAKE_C_COMPILER=${CC}                \
           -DCMAKE_CXX_COMPILER=${CXX}             \
-          -DPYTHONOCC_INSTALL_DIRECTORY=${OCC_INSTALL_DIR}/OCC
+          -DPYTHONOCC_INSTALL_DIRECTORY=${OCC_INSTALL_DIR}
 
 $MAKE VERBOSE=1 $MAKEOPT
 $MAKE install
