@@ -11,6 +11,10 @@ DO_LATEST=false
 
 # defualt SHA (7.4.0)
 SHA=7848ff8412c6358bf19d113cb46753ef8d96351a
+# defualt SHA (7.5.1)
+#SHA=5b38e1eae3e9d69f1d81280f70f0e4e8a385ad14
+
+# branch
 BRANCH=master
 
 while [[ $# -gt 0 ]]
@@ -32,6 +36,13 @@ case $key in
     DO_LATEST=false
     shift # past argument
     shift # past param
+    ;;
+    --75)
+    SHA=5b38e1eae3e9d69f1d81280f70f0e4e8a385ad14	 
+    DO_LATEST=false
+    shift # past argument
+    shift # past param
+    ;;
 esac
 done
 

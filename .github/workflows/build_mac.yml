@@ -24,11 +24,55 @@ jobs:
       - uses: actions/checkout@v2
       - name: install-dependencies1
         run: |
-            brew install cmake open-mpi scalapack wget zlib netcdf hdf5 numpy scipy coreutils llvm libomp gmsh wxPython mpi4py mercurial
+           brew install cmake gcc open-mpi scalapack wget zlib netcdf hdf5 numpy scipy coreutils llvm libomp gmsh wxPython mpi4py mercurial rapidjson
       - name: install-dependencies2
         run: |
-             $(brew --prefix)/opt/Python@3/bin/pip3 install six matplotlib Pillow hgapi PyOpenGL netCDF4 h5py PyPDF2 pdfrw future
-      - name: install-packages
+           $(brew --prefix)/opt/Python@3/bin/pip3 install six matplotlib Pillow hgapi PyOpenGL netCDF4 h5py PyPDF2 pdfrw future
+      - name: setup twopi
         run: |
-            brew tap piScope/twopi
-            brew install -v -s piscope/twopi/twopi 
+           mkdir ${PWD}/twopi_root
+           mkdir ${PWD}/twopi_root/bin
+           mkdir ${PWD}/twopi_root/include	   
+           mkdir ${PWD}/log
+           echo "TwoPiRoot=${PWD}/twopi_root" >> $GITHUB_ENV
+           echo "TwoPiDevice=brew" >> $GITHUB_ENV
+           echo "TwoPiGit=https://github.com/piScope" >> $GITHUB_ENV
+           PP=${PWD}/twopi_root/bin:$(brew --prefix)/bin:$(brew --prefix)/opt/llvm/bin:$(brew --prefix)/opt/python@3.9/bin:$PATH
+           echo "MYPATH=${PP}" >> $GITHUB_ENV	   
+           echo "PYTHONBIN=$(brew --prefix)/opt/python@3.9/bin/python3" >> $GITHUB_ENV
+           ln -s /usr/local/bin/gfortran-11 ${PWD}/twopi_root/bin/gfortran
+           ln -s /usr/local/include/rapidjsonn ${PWD}/twopi_root/include/rapidjson
+      - name: install-packages(PyOCC)
+        env:
+          TwoPiRoot: ${{ env.TwoPiRoot }}
+          TwoPiDevice: ${{ env.TwoPiDevice }}
+          TwoPiGit: ${{ env.TwoPiGit }}	  
+          PYTHON: ${{ env.PYTHONBIN }}
+          PATH: ${{ env.MYPATH }}
+        run: |
+           echo $PWD
+           ls -l
+           echo $TwoPiDevice
+           echo $TwoPiRoot
+           echo $TwoPiGit
+           echo "PATH: "$PATH
+           export CXXFLAGS="-I /usr/local/include"
+           ./bin/twopi clone PyOCC --75
+           ./bin/twopi build PyOCC
+      - name: install-packages(Rest)
+        env:
+          TwoPiRoot: ${{ env.TwoPiRoot }}
+          TwoPiDevice: ${{ env.TwoPiDevice }}
+          TwoPiGit: ${{ env.TwoPiGit }}	  
+          PYTHON: ${{ env.PYTHONBIN }}
+          PATH: ${{ env.MYPATH }}
+        run: |
+           echo $PWD
+           ls -l
+           echo $TwoPiDevice
+           echo $TwoPiRoot
+           echo $TwoPiGit
+           echo $PATH
+           which gfortran
+           ./bin/twopi install modules --no-occ-gmsh --no-python_mod --no-pyocc --log-dir ${PWD}/log
+

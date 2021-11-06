@@ -29,6 +29,7 @@ PISCOPE_BRANCH=master
 NO_WX=""
 NO_PYTHON_MOD=0
 NO_OCC_GMSH=0
+NO_PYOCC=0
 LOGDIR=$HOME/TwoPiInstallLog
 
 while [[ $# -gt 0 ]]
@@ -73,6 +74,10 @@ case $key in
     NO_OCC_GMSH=1
     shift # past param    
     ;;
+    --no-pyocc)
+    NO_PYOCC=1
+    shift # past PyOCC
+    ;;
     --help)
     _usage
     exit 1
@@ -111,6 +116,13 @@ if [[ "$NO_OCC_GMSH" -eq "0" ]]; then
     $TWOPI install gmsh       | tee $LOGDIR/gmsh.log 
 else 
     echo skiping OOC/gmsh
+fi
+
+if [[ "$NO_PYOCC" -eq "1" ]]; then
+    echo skiping PyOCC    
+else
+    echo Installing PyOCC
+    $TWOPI install PyOCC | tee $LOGDIR/PyOCC.log
 fi
 
 echo Installing hypre

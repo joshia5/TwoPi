@@ -2,6 +2,25 @@
 
 # common envriomental variables
 
+#
+# We use ${PYTHON} as much as possible in this build-system
+#   * python may point system python which could be 2.7
+#   * ${TwoPiRoot}/bin/python may be a source of trobule in future..
+#
+
+if [ -z "${PYTHON+xxx}" ]; then
+    #echo "VAR is not set at all";
+    PYTHON=`which python`
+fi
+if [ -z "$PYTHON" ] && [ "${PYTHON+xxx}" = "xxx" ]; then
+    #echo "VAR is set but empty"; 
+    PYTHON=`which python`
+fi
+
+#
+#  REPO and versions
+#
+
 piScope_REPO=piScope
 
 # Strumpack
