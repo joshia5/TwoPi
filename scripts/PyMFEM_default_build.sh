@@ -109,7 +109,7 @@ if $DO_SWIG ;then
               --mfem-prefix=${TwoPiRoot}/mfem       \
               --mfemp-prefix=${TwoPiRoot}/mfem/par  \
               --mfems-prefix=${TwoPiRoot}/mfem/ser  \
-              --mfem-source=${TwoPiRoot}/src/mfem   \	      
+              --mfem-source=${TwoPiRoot}/src/mfem   \
               --hypre-prefix=${TwoPiRoot}           \
               --metis-prefix=${TwoPiRoot}           \
               $DRY_RUN
