@@ -124,6 +124,7 @@ if $DO_SERIAL;then
            --mfem-prefix=${TwoPiRoot}/mfem       \
            --mfemp-prefix=${TwoPiRoot}/mfem/par  \
            --mfems-prefix=${TwoPiRoot}/mfem/ser  \
+           --mfem-source=${TwoPiRoot}/src/mfem   \
 	   $DRY_RUN
 fi
 
@@ -150,6 +151,7 @@ if $DO_DEFAULT ;then
            --mfem-prefix=${TwoPiRoot}/mfem              \
            --mfemp-prefix=${TwoPiRoot}/mfem/par         \
            --mfems-prefix=${TwoPiRoot}/mfem/ser         \
+           --mfem-source=${TwoPiRoot}/src/mfem          \
 	   --hypre-prefix=${TwoPiRoot}                  \
 	   --metis-prefix=${TwoPiRoot}                  \
 	   $ENABLE_PUMI $PUMI_PREFIX                    \
