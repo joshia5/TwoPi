@@ -5,7 +5,8 @@ _usage() {
     echo '            --eneable-scotch (default)'
     echo '            --disable-scotch'
     echo '            --enable-metis (default)'
-    echo '            --disable-metis'        
+    echo '            --disable-metis'
+    echo '            --debug (-g option)'
     echo '            --help'
 }
 
@@ -20,6 +21,7 @@ source $SCRIPT
 
 _USE_SCOTCH="ON"
 _USE_METIS="ON"
+_USE_DEBUG="OFF"
 
 while [[ $# -gt 0 ]]
 do
@@ -40,6 +42,10 @@ case $key in
     --disable-metis)
     _USE_METIS="OFF"
     shift # past argument    
+    ;;
+    --debug)
+    _USE_DEBUG="ON"
+    shift # past argument
     ;;
     --help)
     _usage
@@ -100,6 +106,12 @@ if [[ "${_USE_METIS}" == "ON" ]]; then
     ORDERING="-Dmetis "${ORDERING}" -Dparmetis"    
 fi
 sed -i${BKEXT} "s,ORDERINGSF  = -Dpord,ORDERINGSF  = $ORDERING,g" Makefile.inc
+
+if [[ "${_USE_DEBUG}" == "ON" ]]; then
+    sed -i${BKEXT} 's,OPTF    = -O,OPTF    = -g,g' Makefile.inc
+    sed -i${BKEXT} 's,OPTC    = -O,OPTC    = -g,g' Makefile.inc
+    sed -i${BKEXT} 's,OPTL    = -O,OPTL    = -g,g' Makefile.inc
+fi
 
 $MAKE all MPICC=${MPICC} MPIFC=${MPIFC} MPIFL=${MPIFL} \
       OMPFCFLAG=${OMPFCFLAG} \
