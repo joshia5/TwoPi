@@ -48,11 +48,13 @@ else
 fi
 echo $PWD
 
-if [ "${USE_DEBUG}" -eq "ON" ]; then
+if [ ${USE_DEBUG} = "ON" ]; then
     CMAKE_BUILD_TYPE='Debug'
 else
     CMAKE_BUILD_TYPE='Release'
 fi
+
+echo buid-type ${CMAKE_BUILD_TYPE}
 
 cmake .. -DCMAKE_INSTALL_NAME_DIR=${TwoPiRoot}/lib  \
          -DCMAKE_INSTALL_PREFIX=${TwoPiRoot}        \
