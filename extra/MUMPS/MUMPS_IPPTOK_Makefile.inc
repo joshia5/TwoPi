@@ -105,8 +105,8 @@ CDEFS   = -DAdd_
 #Begin Optimized options
 # uncomment -fopenmp in lines below to benefit from OpenMP
 # -nofor_main (intel compiler option to use MUMPS from C main)
-OPTF    = -O -fPIC -DBLR_MT -nofor_main -qopenmp # -fopenmp
-OPTL    = -O -fPIC -DBLR_MT -nofor_main -qopenmp # -fopenmp
+OPTF    = -O -fPIC -DBLR_MT -nofor-main -qopenmp # -fopenmp
+OPTL    = -O -fPIC -DBLR_MT -nofor-main -qopenmp # -fopenmp
 OPTC    = -O -fPIC -qopenmp# -fopenmp
 #End Optimized options
 INCS = $(INCPAR)
