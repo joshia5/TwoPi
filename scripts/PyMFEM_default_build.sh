@@ -129,7 +129,7 @@ if $DO_SERIAL;then
 fi
 
 if $DO_PARALLEL ;then
-    ${PYTHON} setup.py install                             \
+    ${PYTHON} setup.py install                          \
            --mfem-prefix-no-swig                        \
            --no-serial                                  \
            --with-parallel                              \
@@ -139,6 +139,7 @@ if $DO_PARALLEL ;then
            --mfems-prefix=${TwoPiRoot}/mfem/ser         \
 	   --hypre-prefix=${TwoPiRoot}                  \
 	   --metis-prefix=${TwoPiRoot}                  \
+           --mfem-source=${TwoPiRoot}/src/mfem          \
 	   $ENABLE_PUMI $PUMI_PREFIX                    \
 	   $DRY_RUN	   
 fi
