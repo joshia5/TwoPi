@@ -54,12 +54,11 @@ export STRUMPACKINCDIR=${TwoPiRoot}/include
 export STRUMPACKLNKDIR=${TwoPiRoot}/lib
 
 if $DO_CLEAN_SWIG ;then
-    $MAKE cleancxx
+    $PYTHON setup.py clean --swig
     exit 0
 fi
 if $DO_SWIG ;then
-    $MAKE cxx
-
+    $PYTHON setup.py install --swig
     exit 0
 fi
 
