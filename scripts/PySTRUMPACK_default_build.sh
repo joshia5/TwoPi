@@ -4,6 +4,12 @@
 SCRIPT=$(dirname $BASH_SOURCE)/env_${TwoPiDevice}.sh
 source $SCRIPT
 
+_usage() {
+    echo 'PySTRUMPACK : STRUMPACK wrapper'
+    echo '   options: --clean-swig'
+    echo '            --run-swig'
+}
+
 DO_SWIG=false
 DO_CLEAN_SWIG=false
 
@@ -18,6 +24,10 @@ case $key in
     --run-swig)
     DO_SWIG=true
     shift # past argument    
+    ;;
+    --help)
+    _usage
+    exit 1
     ;;
     *)
     echo "Unknown option " $key
