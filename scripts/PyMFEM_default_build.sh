@@ -11,6 +11,7 @@ _usage() {
     echo '            --run-swig'
     echo '            --with-pumi'
     echo '            --pumi-prefix'
+    echo '            --with-suitesparse'
     echo '            --dry-run'        
     
 }
@@ -33,6 +34,7 @@ DRY_RUN=''
 
 PUMI_PREFIX=""
 ENBLE_PUMI=""
+ENABLE_SUITESPARSE=""
 
 while [[ $# -gt 0 ]]
 do
@@ -69,6 +71,10 @@ case $key in
     PUMI_PREFIX="--pumi-prefix="$2
     shift # past argument    
     shift # past param
+    ;;
+    --with-suitesparse)
+    ENABLE_SUITESPARSE="--with-suitesparse --suitesparse_prefix="${TwoPiRoot}
+    shift # past argument
     ;;
     --help)
     _usage
@@ -141,6 +147,7 @@ if $DO_PARALLEL ;then
 	   --metis-prefix=${TwoPiRoot}                  \
            --mfem-source=${TwoPiRoot}/src/mfem          \
 	   $ENABLE_PUMI $PUMI_PREFIX                    \
+           $ENABLE_SUITESPARSE                          \
 	   $DRY_RUN	   
 fi
 
@@ -156,6 +163,7 @@ if $DO_DEFAULT ;then
 	   --hypre-prefix=${TwoPiRoot}                  \
 	   --metis-prefix=${TwoPiRoot}                  \
 	   $ENABLE_PUMI $PUMI_PREFIX                    \
+           $ENABLE_SUITESPARSE                          \
 	   $DRY_RUN	   	   
 fi
 
