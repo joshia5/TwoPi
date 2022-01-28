@@ -41,7 +41,7 @@ cd ${REPO}/KLU
 make MY_METIS_LIB=${TwoPiRoot}/lib/libmetis.so MY_METIS_INC=${TwoPiRoot}/include
 
 cd ${REPO}/UMFPACK
-make
+make MY_METIS_LIB=${TwoPiRoot}/lib/libmetis.so MY_METIS_INC=${TwoPiRoot}/include
 
 
 cd ${REPO}/KLU
