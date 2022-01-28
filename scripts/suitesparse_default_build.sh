@@ -10,19 +10,19 @@ SRCDIR=${TwoPiRoot}/src
 REPO=${SRCDIR}/${SUITESPARSE_REPO}
 
 cd ${REPO}/SuiteSparse_config
-make 
+make MY_METIS_LIB=${TwoPiRoot}/lib/libmetis.so MY_METIS_INC=${TwoPiRoot}/include
 make install INSTALL=${TwoPiRoot}
 
 cd ${REPO}/AMD
-make 
+make MY_METIS_LIB=${TwoPiRoot}/lib/libmetis.so MY_METIS_INC=${TwoPiRoot}/include
 make install INSTALL=${TwoPiRoot}
 
 cd ${REPO}/CAMD
-make 
+make MY_METIS_LIB=${TwoPiRoot}/lib/libmetis.so MY_METIS_INC=${TwoPiRoot}/include
 make install INSTALL=${TwoPiRoot}
 
 cd ${REPO}/CCOLAMD
-make 
+make MY_METIS_LIB=${TwoPiRoot}/lib/libmetis.so MY_METIS_INC=${TwoPiRoot}/include
 make install INSTALL=${TwoPiRoot}
 
 cd ${REPO}/COLAMD
@@ -30,11 +30,11 @@ make MY_METIS_LIB=${TwoPiRoot}/lib/libmetis.so MY_METIS_INC=${TwoPiRoot}/include
 make install INSTALL=${TwoPiRoot}
 
 cd ${REPO}/CHOLMOD
-make 
+make MY_METIS_LIB=${TwoPiRoot}/lib/libmetis.so MY_METIS_INC=${TwoPiRoot}/include
 make install INSTALL=${TwoPiRoot}
 
 cd ${REPO}/BTF
-make 
+make MY_METIS_LIB=${TwoPiRoot}/lib/libmetis.so MY_METIS_INC=${TwoPiRoot}/include
 make install INSTALL=${TwoPiRoot}
 
 cd ${REPO}/KLU
