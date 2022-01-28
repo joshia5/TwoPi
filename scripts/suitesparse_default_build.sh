@@ -6,7 +6,6 @@ _usage() {
     echo 'SUITESPARSE installer installs UMFPACK/KLU'
 }
 
-
 SRCDIR=${TwoPiRoot}/src
 REPO=${SRCDIR}/${SUITESPARSE_REPO}
 
