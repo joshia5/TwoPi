@@ -25,11 +25,11 @@ cd ${REPO}/CCOLAMD
 make 
 make install INSTALL=${TwoPiRoot}
 
-cd ${REPO}/CHOLMOD
-make 
+cd ${REPO}/COLAMD
+make MY_METIS_LIB=${TwoPiRoot}/lib/libmetis.so MY_METIS_INC=${TwoPiRoot}/include
 make install INSTALL=${TwoPiRoot}
 
-cd ${REPO}/COLAMD
+cd ${REPO}/CHOLMOD
 make 
 make install INSTALL=${TwoPiRoot}
 
@@ -38,7 +38,7 @@ make
 make install INSTALL=${TwoPiRoot}
 
 cd ${REPO}/KLU
-make  MY_METIS_LIB=${TwoPiRoot}/lib/libmetis.so MY_METIS_INC=${TwoPiRoot}/include
+make MY_METIS_LIB=${TwoPiRoot}/lib/libmetis.so MY_METIS_INC=${TwoPiRoot}/include
 
 cd ${REPO}/UMFPACK
 make
