@@ -9,6 +9,10 @@ _usage() {
 SRCDIR=${TwoPiRoot}/src
 REPO=${SRCDIR}/${SUITESPARSE_REPO}
 
+cd ${REPO}/SuiteSparse_config
+make 
+make install INSTALL=${TwoPiRoot}
+
 cd ${REPO}/AMD
 make 
 make install INSTALL=${TwoPiRoot}
