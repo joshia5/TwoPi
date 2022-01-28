@@ -73,7 +73,7 @@ case $key in
     shift # past param
     ;;
     --with-suitesparse)
-    ENABLE_SUITESPARSE="--with-suitesparse --suitesparse_prefix="${TwoPiRoot}
+    ENABLE_SUITESPARSE="--with-suitesparse --suitesparse-prefix="${TwoPiRoot}
     shift # past argument
     ;;
     --help)
