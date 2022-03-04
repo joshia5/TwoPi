@@ -9,6 +9,8 @@ _usage() {
 SRCDIR=${TwoPiRoot}/src
 REPO=${SRCDIR}/${SUITESPARSE_REPO}
 
+export LD_LIBRARY_PATH=${LD_LIBRARY_PATH}:${TwoPiRoot}/lib
+
 cd ${REPO}/SuiteSparse_config
 make MY_METIS_LIB=${TwoPiRoot}/lib/libmetis.so MY_METIS_INC=${TwoPiRoot}/include \
      F77=${FC} CC=${CC} CXX=${CXX} INSTALL=${TwoPiRoot}
