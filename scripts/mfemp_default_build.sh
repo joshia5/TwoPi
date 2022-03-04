@@ -20,6 +20,7 @@ cd $REPO/cmbuild_par
 rm -rf $REPO/cmbuild_par/*
 
 WITH_PUMI=NO
+WITH_SUITESPARSE=NO
 
 while [[ $# -gt 0 ]]
 do
@@ -28,6 +29,10 @@ case $key in
     --with-pumi)
     WITH_PUMI=YES
     shift # past argument    
+    ;;
+    --with-suitesparse)
+    WITH_SUITESPARSE=YES
+    shift # past argument
     ;;
     *)
     echo "Unknown option " $key
@@ -50,6 +55,8 @@ $CMAKE .. -DCMAKE_VERBOSE_MAKEFILE=1                           \
 	  -DMFEM_ENABLE_EXAMPLES=1                             \
           -DMFEM_USE_PUMI="${WITH_PUMI}"                       \
  	  -DPUMI_DIR="${TwoPiRoot}"                            \
+          -DMFEM_USE_SUITESPARSE="${WITH_SUITESPARSE}"         \
+          -DSuiteSparse_DIR="${TwoPiRoot}"                     \
           -DCMAKE_CXX_COMPILER=$MPICXX                         \
           -DCMAKE_CXX_FLAGS=$CXX11FLAG                         \
 	  -DCMAKE_SHARED_LINKER_FLAGS="-L$TWOPILIB"            \
