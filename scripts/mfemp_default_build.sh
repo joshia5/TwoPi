@@ -76,7 +76,8 @@ $CMAKE .. -DCMAKE_VERBOSE_MAKEFILE=1                           \
           -DCMAKE_CXX_FLAGS=$CXX11FLAG                         \
 	  -DCMAKE_SHARED_LINKER_FLAGS="-L$TWOPILIB -lHYPRE -lmetis"   \
 	  -DCMAKE_EXE_LINKER_FLAGS="-L$TWOPILIB -lHYPRE -lmetis"      \
-          -DCMAKE_INSTALL_RPATH="${TWOPILIB}":${TwoPiRoot}/mfem/par/lib
+          -DCMAKE_INSTALL_RPATH="${TWOPILIB}":${TwoPiRoot}/mfem/par/lib \
+          -DCMAKE_BUILD_WITH_INSTALL_RPATH=1
 
 $MAKE $MAKEOPT
 $MAKE install
