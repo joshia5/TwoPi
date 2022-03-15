@@ -1,5 +1,34 @@
 #!/bin/bash
 
+SCRIPT=$(dirname "$0")/env_${TwoPiDevice}.sh
+source $SCRIPT
+
+_usage() {
+    echo 'MFEM : parallel build (with metis/hypre)'
+    echo '   options: --cuda (nvcc must be found on PATH)'
+}
+
+ENABLE_CUDA="NO"
+
+while [[ $# -gt 0 ]]
+do
+key="$1"
+case $key in
+    --cuda)
+    ENABLE_CUDA="YES"	
+    shift # past argument    	
+    ;;
+    --help)
+    _usage
+    exit 1
+    ;;
+    *)
+    echo "Unknown option " $key
+    exit 2  #  error_code=2
+    ;;
+esac
+done
+
 SRCDIR=${TwoPiRoot}/src
 REPO=${SRCDIR}/mfem
 TWOPILIB=${TwoPiRoot}/lib
@@ -7,9 +36,7 @@ TWOPIINC=${TwoPiRoot}/include
 
 CMAKE=$(command -v cmake)
 MAKE=$(command -v make)
-
-SCRIPT=$(dirname "$0")/env_${TwoPiDevice}.sh
-source $SCRIPT
+HOST_COMPILER=$(command -v ${MPICC})
 
 cd $REPO
 
@@ -34,6 +61,10 @@ case $key in
     WITH_SUITESPARSE=YES
     shift # past argument
     ;;
+    --cuda)
+    ENABLE_CUDA=YES	
+    shift # past argument    	
+    ;;
     *)
     echo "Unknown option " $key
     exit 2  #  error_code=2
@@ -52,6 +83,8 @@ $CMAKE .. -DCMAKE_VERBOSE_MAKEFILE=1                           \
           -DMFEM_USE_ZLIB=1                                    \
           -DMFEM_USE_MPI=1                                     \
 	  -DMFEM_USE_METIS_5=1                                 \
+	  -DMFEM_USE_CUDA=${ENABLE_CUDA}                       \
+          -DCMAKE_CUDA_HOST_COMPILER=${HOST_COMPILER}          \
 	  -DMFEM_ENABLE_EXAMPLES=1                             \
           -DMFEM_USE_PUMI="${WITH_PUMI}"                       \
  	  -DPUMI_DIR="${TwoPiRoot}"                            \

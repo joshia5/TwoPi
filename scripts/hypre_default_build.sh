@@ -15,7 +15,7 @@ do
 key="$1"
 case $key in
     --cuda)
-    ENABLE_CUDA="YES"	
+    ENABLE_CUDA=YES	
     shift # past argument    	
     ;;
     --help)
