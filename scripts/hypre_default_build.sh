@@ -37,8 +37,8 @@ HOST_COMPILER=$(command -v ${MPICC})
 
 HYPREDIR=${SRCDIR}/hypre-${HYPRE_VERSION}
 
-export CXX=${MPICXX}
-export CC=${MPICC}
+#export CXX=${MPICXX}
+#export CC=${MPICC}
 
 mkdir -p ${HYPREDIR}/src/cmbuild
 cd ${HYPREDIR}/src/cmbuild
