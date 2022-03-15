@@ -50,6 +50,7 @@ WITH_PUMI=NO
 WITH_SUITESPARSE=NO
 ENABLE_CUDA=NO
 
+echo "here"
 while [[ $# -gt 0 ]]
 do
 key="$1"
@@ -63,6 +64,7 @@ case $key in
     shift # past argument
     ;;
     --cuda)
+    echo "here"
     ENABLE_CUDA=YES
     echo cuda"${ENABLE_CUDA}"	
     shift # past argument    	
