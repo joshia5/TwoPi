@@ -74,8 +74,8 @@ $CMAKE .. -DCMAKE_VERBOSE_MAKEFILE=1                           \
           -DSuiteSparse_DIR="${TwoPiRoot}"                     \
           -DCMAKE_CXX_COMPILER=$MPICXX                         \
           -DCMAKE_CXX_FLAGS=$CXX11FLAG                         \
-	  -DCMAKE_SHARED_LINKER_FLAGS="-L$TWOPILIB"            \
-	  -DCMAKE_EXE_LINKER_FLAGS="-L$TWOPILIB"               \
+	  -DCMAKE_SHARED_LINKER_FLAGS="-L$TWOPILIB -lHYPRE -lmetis"   \
+	  -DCMAKE_EXE_LINKER_FLAGS="-L$TWOPILIB -lHYPRE -lmetis"      \
           -DCMAKE_CXX_STANDARD_LIBRARIES="-lHYPRE -lmetis"
 $MAKE $MAKEOPT
 $MAKE install
