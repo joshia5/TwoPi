@@ -33,7 +33,7 @@ GIT=$(command -v git)
 SRCDIR=${TwoPiRoot}/src
 CMAKE=$(command -v cmake)
 MAKE=$(command -v make)
-
+HOST_COMPILER=$(command -v ${MPICC})
 
 HYPREDIR=${SRCDIR}/hypre-${HYPRE_VERSION}
 
@@ -48,7 +48,7 @@ $CMAKE .. -DCMAKE_VERBOSE_MAKEFILE=1                                     \
           -DHYPRE_INSTALL_PREFIX=${TwoPiRoot}                            \
           -DHYPRE_SHARED=1                                               \
           -DHYPRE_WITH_CUDA=${ENABLE_CUDA}                               \
-          -DCMAKE_CUDA_HOST_COMPILER=${MPICC}                            \
+          -DCUDA_HOST_COMPILER=${HOST_COMPILER}                          \
           -DCMAKE_INSTALL_PREFIX=${TwoPiRoot}                            \
           -DCMAKE_INSTALL_NAME_DIR=${TwoPiRoot}/lib                            
 
