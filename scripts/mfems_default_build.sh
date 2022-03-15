@@ -36,6 +36,7 @@ TWOPIINC=${TWOPI}/include
 
 CMAKE=$(command -v cmake)
 MAKE=$(command -v make)
+HOST_COMPILER=$(command -v ${CC})
 
 cd $REPO
 
@@ -54,6 +55,7 @@ $CMAKE .. -DCMAKE_VERBOSE_MAKEFILE=1                         \
           -DMFEM_USE_EXCEPTIONS=1                            \
           -DCMAKE_CXX_FLAGS=$CXX11FLAG                       \
 	  -DCMAKE_CXX_COMPILER=${CXX}                        \
+          -DCMAKE_CUDA_HOST_COMPILER=${HOST_COMPILER}        \
 	  -DMFEM_USE_CUDA=${ENABLE_CUDA}
 
 $MAKE $MAKEOPT
