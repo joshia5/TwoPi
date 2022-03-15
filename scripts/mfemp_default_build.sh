@@ -63,7 +63,8 @@ case $key in
     shift # past argument
     ;;
     --cuda)
-    ENABLE_CUDA=YES	
+    ENABLE_CUDA=YES
+    echo cuda"${ENABLE_CUDA}"	
     shift # past argument    	
     ;;
     *)
