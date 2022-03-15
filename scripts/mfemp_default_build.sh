@@ -73,6 +73,8 @@ case $key in
 esac
 done
 
+echo cuda"${ENABLE_CUDA}"
+
 $CMAKE .. -DCMAKE_VERBOSE_MAKEFILE=1                           \
           -DBUILD_SHARED_LIBS=1                                \
           -DMFEM_ENABLE_EXAMPLES=1                             \
@@ -84,8 +86,8 @@ $CMAKE .. -DCMAKE_VERBOSE_MAKEFILE=1                           \
           -DMFEM_USE_ZLIB=1                                    \
           -DMFEM_USE_MPI=1                                     \
 	  -DMFEM_USE_METIS_5=1                                 \
-	  -DMFEM_USE_CUDA=${ENABLE_CUDA}                       \
-          -DCMAKE_CUDA_HOST_COMPILER=${HOST_COMPILER}          \
+	  -DMFEM_USE_CUDA="${ENABLE_CUDA}"                     \
+          -DCMAKE_CUDA_HOST_COMPILER="${HOST_COMPILER}"        \
 	  -DMFEM_ENABLE_EXAMPLES=1                             \
           -DMFEM_USE_PUMI="${WITH_PUMI}"                       \
  	  -DPUMI_DIR="${TwoPiRoot}"                            \
