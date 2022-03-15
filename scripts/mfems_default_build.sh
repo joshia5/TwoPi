@@ -3,6 +3,32 @@
 SCRIPT=$(dirname "$0")/env_${TwoPiDevice}.sh
 source $SCRIPT
 
+_usage() {
+    echo 'mfems : serial MFEM'
+    echo '   options: --cuda'
+}
+
+ENABLE_CUDA="NO"
+
+while [[ $# -gt 0 ]]
+do
+key="$1"
+case $key in
+    --cuda)
+    ENABLE_CUDA="YES"	
+    shift # past argument    	
+    ;;
+    --help)
+    _usage
+    exit 1
+    ;;
+    *)
+    echo "Unknown option " $key
+    exit 2  #  error_code=2
+    ;;
+esac
+done
+    
 SRCDIR=${TwoPiRoot}/src
 REPO=${SRCDIR}/mfem
 TWOPILIB=${TWOPI}/lib
@@ -12,6 +38,7 @@ CMAKE=$(command -v cmake)
 MAKE=$(command -v make)
 
 cd $REPO
+
 
 echo "############# configuring mfem serial"
 
@@ -26,7 +53,8 @@ $CMAKE .. -DCMAKE_VERBOSE_MAKEFILE=1                         \
 	  -DMFEM_ENABLE_EXAMPLES=1                           \
           -DMFEM_USE_EXCEPTIONS=1                            \
           -DCMAKE_CXX_FLAGS=$CXX11FLAG                       \
-	  -DCMAKE_CXX_COMPILER=${CXX}
+	  -DCMAKE_CXX_COMPILER=${CXX}                        \
+	  -DMFEM_USE_CUDA=${ENABLE_CUDA}
 
 $MAKE $MAKEOPT
 $MAKE install
