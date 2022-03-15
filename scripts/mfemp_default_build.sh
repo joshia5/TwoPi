@@ -36,7 +36,7 @@ TWOPIINC=${TwoPiRoot}/include
 
 CMAKE=$(command -v cmake)
 MAKE=$(command -v make)
-HOST_COMPILER=$(command -v ${MPICC})
+HOST_COMPILER=$(command -v ${MPICXX})
 
 cd $REPO
 
