@@ -48,6 +48,7 @@ rm -rf $REPO/cmbuild_par/*
 
 WITH_PUMI=NO
 WITH_SUITESPARSE=NO
+ENABLE_CUDA=NO
 
 while [[ $# -gt 0 ]]
 do
