@@ -8,27 +8,6 @@ _usage() {
     echo '   options: --cuda (nvcc must be found on PATH)'
 }
 
-ENABLE_CUDA="NO"
-
-while [[ $# -gt 0 ]]
-do
-key="$1"
-case $key in
-    --cuda)
-    ENABLE_CUDA="YES"	
-    shift # past argument    	
-    ;;
-    --help)
-    _usage
-    exit 1
-    ;;
-    *)
-    echo "Unknown option " $key
-    exit 2  #  error_code=2
-    ;;
-esac
-done
-
 SRCDIR=${TwoPiRoot}/src
 REPO=${SRCDIR}/mfem
 TWOPILIB=${TwoPiRoot}/lib
@@ -50,7 +29,6 @@ WITH_PUMI=NO
 WITH_SUITESPARSE=NO
 ENABLE_CUDA=NO
 
-echo "here"
 while [[ $# -gt 0 ]]
 do
 key="$1"
@@ -64,9 +42,7 @@ case $key in
     shift # past argument
     ;;
     --cuda)
-    echo "here"
     ENABLE_CUDA="YES"
-    echo "here"    
     shift # past argument    	
     ;;
     *)
