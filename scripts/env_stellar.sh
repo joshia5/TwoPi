@@ -1,17 +1,17 @@
 #!/bin/bash
-CC=icc
-CXX=icpc
-FC=ifort
-FL=ifort
-MPICC=cc
-MPICXX=CC
-MPIFC=ftn
-MPIFL=ftn
-OMPFLAG="-qopenmp"
-OMPLINKFLAG=-qopenmp
-OMPCXXFLAG=-qopenmp
-OMPCCFLAG=-qopenmp
-OMPFCFLAG=-qopenmp
+CC=gcc
+CXX=g++
+FC=gfortran
+FL=gfortran
+MPICC=mpicc
+MPICXX=mpicxx
+MPIFC=mpiffort
+MPIFL=mpifort
+OMPFLAG="-fopenmp"
+OMPLINKFLAG=-fopenmp
+OMPCXXFLAG=-fopenmp
+OMPCCFLAG=-fopenmp
+OMPFCFLAG=-fopenmp
 
 source $(dirname $BASH_SOURCE)/env_common.sh
 
