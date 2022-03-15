@@ -48,6 +48,7 @@ $CMAKE .. -DCMAKE_VERBOSE_MAKEFILE=1                                     \
           -DHYPRE_INSTALL_PREFIX=${TwoPiRoot}                            \
           -DHYPRE_SHARED=1                                               \
           -DHYPRE_WITH_CUDA=${ENABLE_CUDA}                               \
+          -DCMAKE_CUDA_HOST_COMPILER=${MPICC}                            \
           -DCMAKE_INSTALL_PREFIX=${TwoPiRoot}                            \
           -DCMAKE_INSTALL_NAME_DIR=${TwoPiRoot}/lib                            
 
