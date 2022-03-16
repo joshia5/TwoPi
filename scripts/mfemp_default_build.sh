@@ -46,7 +46,7 @@ case $key in
     CUDA_OPTS=" -DMFEM_USE_CUDA=1"
     CUDA_OPTS=${CUDA_OPTS}" -DCMAKE_CUDA_HOST_COMPILER=""${HOST_COMPILER}"
     if [ -n "${CUDA_ARCH}" ]; then
-	CUDA_OPTS="${CUDA_OPTS}"" -DCMAKE_CUDA_ARCHITECTURE=""${CUDA_ARCH}"
+	CUDA_OPTS="${CUDA_OPTS}"" -DCMAKE_CUDA_ARCHITECTURES=""${CUDA_ARCH}"
     fi
     shift # past argument    	
     ;;
