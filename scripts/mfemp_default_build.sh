@@ -15,7 +15,7 @@ TWOPIINC=${TwoPiRoot}/include
 
 CMAKE=$(command -v cmake)
 MAKE=$(command -v make)
-HOST_COMPILER=$(command -v ${MPICXX})
+
 
 cd $REPO
 
@@ -28,7 +28,7 @@ rm -rf $REPO/cmbuild_par/*
 WITH_PUMI=NO
 WITH_SUITESPARSE=NO
 ENABLE_CUDA=NO
-
+CUDA_OPTIONS=
 while [[ $# -gt 0 ]]
 do
 key="$1"
@@ -42,7 +42,12 @@ case $key in
     shift # past argument
     ;;
     --cuda)
-    ENABLE_CUDA="YES"
+    HOST_COMPILER=$(command -v ${MPICXX})
+    CUDA_OPTS=" -DMFEM_USE_CUDA=1"
+    CUDA_OPTS=${CUDA_OPTS}" -DCMAKE_CUDA_HOST_COMPILER=""${HOST_COMPILER}"
+    if [ -n "${CUDA_ARCH}" ]; then
+	CUDA_OPTS="${CUDA_OPTS}"" -DCMAKE_CUDA_ARCHITECTURE=""${CUDA_ARCH}"
+    fi
     shift # past argument    	
     ;;
     *)
@@ -62,11 +67,10 @@ $CMAKE .. -DCMAKE_VERBOSE_MAKEFILE=1                           \
 	  -DHYPRE_INCLUDE_DIRS=$TWOPIINC                       \
           -DMETIS_DIR=$TWOPILIB                                \
 	  -DMETIS_INCLUDE_DIRS=$TWOPIINC                       \
+	  "${CUDA_OPTS}"                                       \
           -DMFEM_USE_ZLIB=1                                    \
           -DMFEM_USE_MPI=1                                     \
 	  -DMFEM_USE_METIS_5=1                                 \
-	  -DMFEM_USE_CUDA="${ENABLE_CUDA}"                     \
-          -DCMAKE_CUDA_HOST_COMPILER="${HOST_COMPILER}"        \
 	  -DMFEM_ENABLE_EXAMPLES=1                             \
           -DMFEM_USE_PUMI="${WITH_PUMI}"                       \
  	  -DPUMI_DIR="${TwoPiRoot}"                            \

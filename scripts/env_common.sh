@@ -70,3 +70,7 @@ CXX11FLAG=-std=c++11
 # make runs using the half of processor cores
 NPROCHALF=$((($(nproc)+1)/2))
 MAKEOPT="-j "${NPROCHALF}
+
+# CUDA_ARCHITECUTRES (will be passed by DCMAKE_CUDA_ARCHITECTURES)
+CUDA_ARCH=
+

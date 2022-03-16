@@ -24,4 +24,6 @@ source $(dirname $BASH_SOURCE)/env_common.sh
 #SCOTCH_DL=37622
 #SCOTCH_VERSION=6.0.6
 
+# CUDA_ARCHITECUTRES (will be passed by DCMAKE_CUDA_ARCHITECTURES)
+CUDA_ARCH=80
 
