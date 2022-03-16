@@ -12,6 +12,7 @@ _usage() {
     echo '            --with-pumi'
     echo '            --pumi-prefix'
     echo '            --with-suitesparse'
+    echo '            --with-cuda'    
     echo '            --dry-run'        
     
 }
@@ -35,6 +36,7 @@ DRY_RUN=''
 PUMI_PREFIX=""
 ENBLE_PUMI=""
 ENABLE_SUITESPARSE=""
+ENABLE_CUDA=""
 
 while [[ $# -gt 0 ]]
 do
@@ -74,6 +76,10 @@ case $key in
     ;;
     --with-suitesparse)
     ENABLE_SUITESPARSE="--with-suitesparse --suitesparse-prefix="${TwoPiRoot}
+    shift # past argument
+    ;;
+    --with-cuda)
+    ENABLE_CUDA="--with-cuda"
     shift # past argument
     ;;
     --help)
@@ -118,6 +124,7 @@ if $DO_SWIG ;then
               --mfem-source=${TwoPiRoot}/src/mfem   \
               --hypre-prefix=${TwoPiRoot}           \
               --metis-prefix=${TwoPiRoot}           \
+    	      $ENABLE_CUDA                          \
               $DRY_RUN
     
     exit 0
@@ -131,6 +138,7 @@ if $DO_SERIAL;then
            --mfemp-prefix=${TwoPiRoot}/mfem/par  \
            --mfems-prefix=${TwoPiRoot}/mfem/ser  \
            --mfem-source=${TwoPiRoot}/src/mfem   \
+	   $ENABLE_CUDA                          \  
 	   $DRY_RUN
 fi
 
@@ -148,6 +156,7 @@ if $DO_PARALLEL ;then
            --mfem-source=${TwoPiRoot}/src/mfem          \
 	   $ENABLE_PUMI $PUMI_PREFIX                    \
            $ENABLE_SUITESPARSE                          \
+	   $ENABLE_CUDA                                 \
 	   $DRY_RUN	   
 fi
 
@@ -164,6 +173,7 @@ if $DO_DEFAULT ;then
 	   --metis-prefix=${TwoPiRoot}                  \
 	   $ENABLE_PUMI $PUMI_PREFIX                    \
            $ENABLE_SUITESPARSE                          \
+ 	   $ENABLE_CUDA                                 \
 	   $DRY_RUN	   	   
 fi
 

@@ -5,7 +5,7 @@ source $SCRIPT
 
 _usage() {
     echo 'mfems : serial MFEM'
-    echo '   options: --cuda'
+    echo '   options: --with-cuda'
 }
 
 CUDA_OPTIONS=
@@ -14,7 +14,7 @@ while [[ $# -gt 0 ]]
 do
 key="$1"
 case $key in
-    --cuda)
+    --with-cuda)
     HOST_COMPILER=$(command -v ${MPICXX})
     CUDA_OPTS=" -DMFEM_USE_CUDA=1"
     CUDA_OPTS=${CUDA_OPTS}" -DCMAKE_CUDA_HOST_COMPILER=""${HOST_COMPILER}"

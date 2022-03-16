@@ -5,7 +5,7 @@ source $SCRIPT
 
 _usage() {
     echo 'HYPRE : parallel linear solver'
-    echo '   options: --cuda (nvcc must be found on PATH)'
+    echo '   options: --with-cuda (nvcc must be found on PATH)'
 }
 
 ENABLE_CUDA="NO"
@@ -14,7 +14,7 @@ while [[ $# -gt 0 ]]
 do
 key="$1"
 case $key in
-    --cuda)
+    --with-cuda)
     ENABLE_CUDA=YES	
     shift # past argument    	
     ;;

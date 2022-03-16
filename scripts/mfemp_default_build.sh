@@ -5,7 +5,7 @@ source $SCRIPT
 
 _usage() {
     echo 'MFEM : parallel build (with metis/hypre)'
-    echo '   options: --cuda (nvcc must be found on PATH)'
+    echo '   options: --with-cuda (nvcc must be found on PATH)'
 }
 
 SRCDIR=${TwoPiRoot}/src
@@ -41,7 +41,7 @@ case $key in
     WITH_SUITESPARSE=YES
     shift # past argument
     ;;
-    --cuda)
+    --with-cuda)
     HOST_COMPILER=$(command -v ${MPICXX})
     CUDA_OPTS=" -DMFEM_USE_CUDA=1"
     CUDA_OPTS=${CUDA_OPTS}" -DCMAKE_CUDA_HOST_COMPILER=""${HOST_COMPILER}"
