@@ -57,31 +57,51 @@ case $key in
 esac
 done
 
+<<<<<<< Updated upstream
 echo cuda"${ENABLE_CUDA}"
 
 $CMAKE .. -DCMAKE_VERBOSE_MAKEFILE=1                           \
+=======
+METIS_HYPRE_LINK='"'-L" "${TWOPILIB}' -lHYPRE -lmetis"'
+
+COMM=${CMAKE}" .. -DCMAKE_VERBOSE_MAKEFILE=1                           \
+>>>>>>> Stashed changes
           -DBUILD_SHARED_LIBS=1                                \
           -DMFEM_ENABLE_EXAMPLES=1                             \
           -DCMAKE_INSTALL_PREFIX=${TwoPiRoot}/mfem/par         \
           -DHYPRE_DIR=$TWOPILIB                                \
 	  -DHYPRE_INCLUDE_DIRS=$TWOPIINC                       \
           -DMETIS_DIR=$TWOPILIB                                \
+<<<<<<< Updated upstream
 	  -DMETIS_INCLUDE_DIRS=$TWOPIINC                       \
 	  "${CUDA_OPTS}"                                       \
+=======
+	  -DMETIS_INCLUDE_DIRS=${TWOPIINC}                     \
+>>>>>>> Stashed changes
           -DMFEM_USE_ZLIB=1                                    \
           -DMFEM_USE_MPI=1                                     \
 	  -DMFEM_USE_METIS_5=1                                 \
 	  -DMFEM_ENABLE_EXAMPLES=1                             \
-          -DMFEM_USE_PUMI="${WITH_PUMI}"                       \
- 	  -DPUMI_DIR="${TwoPiRoot}"                            \
-          -DMFEM_USE_SUITESPARSE="${WITH_SUITESPARSE}"         \
-          -DSuiteSparse_DIR="${TwoPiRoot}"                     \
+          -DMFEM_USE_PUMI=${WITH_PUMI}                       \
+ 	  -DPUMI_DIR=${TwoPiRoot}                            \
+          -DMFEM_USE_SUITESPARSE=${WITH_SUITESPARSE}         \
+          -DSuiteSparse_DIR=${TwoPiRoot}                     \
           -DCMAKE_CXX_COMPILER=$MPICXX                         \
           -DCMAKE_CXX_FLAGS=$CXX11FLAG                         \
+<<<<<<< Updated upstream
 	  -DCMAKE_SHARED_LINKER_FLAGS="-L$TWOPILIB -lHYPRE -lmetis"   \
 	  -DCMAKE_EXE_LINKER_FLAGS="-L$TWOPILIB -lHYPRE -lmetis"      \
           -DCMAKE_INSTALL_RPATH="${TWOPILIB}":${TwoPiRoot}/mfem/par/lib \
           -DCMAKE_BUILD_WITH_INSTALL_RPATH=1
+=======
+	  -DCMAKE_SHARED_LINKER_FLAGS=${METIS_HYPRE_LINK}      \
+	  -DCMAKE_EXE_LINKER_FLAGS=${METIS_HYPRE_LINK}         \
+          -DCMAKE_INSTALL_RPATH=${TWOPILIB}:${TwoPiRoot}/mfem/par/lib \
+          -DCMAKE_BUILD_WITH_INSTALL_RPATH=1"
+COMM=${COMM}"${CUDA_OPTS}"                                       
+echo $COMM
+eval $COMM
+>>>>>>> Stashed changes
 
 $MAKE $MAKEOPT
 $MAKE install
