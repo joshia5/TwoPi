@@ -8,14 +8,19 @@ _usage() {
     echo '   options: --cuda'
 }
 
-ENABLE_CUDA="NO"
+CUDA_OPTIONS=
 
 while [[ $# -gt 0 ]]
 do
 key="$1"
 case $key in
     --cuda)
-    ENABLE_CUDA=YES	
+    HOST_COMPILER=$(command -v ${MPICXX})
+    CUDA_OPTS=" -DMFEM_USE_CUDA=1"
+    CUDA_OPTS=${CUDA_OPTS}" -DCMAKE_CUDA_HOST_COMPILER=""${HOST_COMPILER}"
+    if [ -n "${CUDA_ARCH}" ]; then
+	CUDA_OPTS="${CUDA_OPTS}"" -DCMAKE_CUDA_ARCHITECTURES=""${CUDA_ARCH}"
+    fi
     shift # past argument    	
     ;;
     --help)
@@ -36,10 +41,8 @@ TWOPIINC=${TWOPI}/include
 
 CMAKE=$(command -v cmake)
 MAKE=$(command -v make)
-HOST_COMPILER=$(command -v ${CC})
 
 cd $REPO
-
 
 echo "############# configuring mfem serial"
 
@@ -47,7 +50,7 @@ mkdir -p $REPO/cmbuild_ser
 cd $REPO/cmbuild_ser
 rm -rf $REPO/cmbuild_ser/*
 
-$CMAKE .. -DCMAKE_VERBOSE_MAKEFILE=1                         \
+COMM="$CMAKE .. -DCMAKE_VERBOSE_MAKEFILE=1                         \
           -DBUILD_SHARED_LIBS=1                              \
           -DMFEM_USE_ZLIB=1                                  \
           -DCMAKE_INSTALL_PREFIX=${TwoPiRoot}/mfem/ser       \
@@ -56,7 +59,12 @@ $CMAKE .. -DCMAKE_VERBOSE_MAKEFILE=1                         \
           -DCMAKE_CXX_FLAGS=$CXX11FLAG                       \
 	  -DCMAKE_CXX_COMPILER=${CXX}                        \
           -DCMAKE_CUDA_HOST_COMPILER=${HOST_COMPILER}        \
-	  -DMFEM_USE_CUDA=${ENABLE_CUDA}
+	  -DMFEM_USE_CUDA=${ENABLE_CUDA}"
+
+COMM=${COMM}"${CUDA_OPTS}"
+
+echo "executing ..."${COMM}
+eval ${COMM}
 
 $MAKE $MAKEOPT
 $MAKE install

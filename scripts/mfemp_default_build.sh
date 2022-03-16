@@ -27,8 +27,8 @@ rm -rf $REPO/cmbuild_par/*
 
 WITH_PUMI=NO
 WITH_SUITESPARSE=NO
-ENABLE_CUDA=NO
 CUDA_OPTIONS=
+
 while [[ $# -gt 0 ]]
 do
 key="$1"
