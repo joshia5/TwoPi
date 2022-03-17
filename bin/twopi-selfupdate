@@ -107,6 +107,7 @@ else
        fi
        
        if [ ! -z "${DO_CLONE}" ]; then
+           mkdir -p "${TwoPiRoot}"/src
            cd "${TwoPiRoot}"/src
 	   if [ -d "${TWOPIBASE}"/src/TwoPi ]; then
                rm -rf "${TwoPiRoot}"/src/TwoPi
