@@ -48,7 +48,11 @@ case $key in
     if [ -n "${CUDA_ARCH}" ]; then
 	CUDA_OPTS="${CUDA_OPTS}"" -DCMAKE_CUDA_ARCHITECTURES=""${CUDA_ARCH}"
     fi
-    shift # past argument    	
+    shift # past argument
+    ;;
+    --help)
+    _usage
+    exit 1
     ;;
     *)
     echo "Unknown option " $key
