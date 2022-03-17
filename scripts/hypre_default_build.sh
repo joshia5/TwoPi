@@ -9,13 +9,14 @@ _usage() {
 }
 
 ENABLE_CUDA="NO"
-
+C_COMPILER=${MPICC} 
 while [[ $# -gt 0 ]]
 do
 key="$1"
 case $key in
     --with-cuda)
-    ENABLE_CUDA=YES	
+    ENABLE_CUDA=YES
+    C_COMPILER=${CC} 	
     shift # past argument    	
     ;;
     --help)
@@ -48,7 +49,7 @@ $CMAKE .. -DCMAKE_VERBOSE_MAKEFILE=1                                     \
           -DHYPRE_INSTALL_PREFIX=${TwoPiRoot}                            \
           -DHYPRE_SHARED=1                                               \
           -DHYPRE_WITH_CUDA=${ENABLE_CUDA}                               \
-	  -DCMAKE_C_COMPILER=${CC}                                       \
+	  -DCMAKE_C_COMPILER=${C_COMPILER}                               \
           -DCMAKE_INSTALL_PREFIX=${TwoPiRoot}                            \
           -DCMAKE_INSTALL_NAME_DIR=${TwoPiRoot}/lib                            
 
