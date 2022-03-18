@@ -75,13 +75,13 @@ else
    mkdir -p $TwoPiRoot/etc
    ln -s $INTERPRETER $TwoPiRoot/bin/python
    ln -s $(dirname $INTERPRETER)/python3-config $TwoPiRoot/bin/python3-config
-   ln -s $(dirname $INTERPRETER)/python3-config $TwoPiRoot/bin/python-config   
 fi
 
 echo $TwoPiDevice > $TwoPiRoot/etc/devicename
 echo $INTERPRETER > $TwoPiRoot/etc/interpreter
 #cp scripts/twopi_env.sh $TwoPiRoot/bin
 cp bin/twopi-config $TwoPiRoot/bin
+cp bin/python-config-wrapper $TwoPiRoot/bin/pyton3-config
 
 cp scripts/activation_scripts/activate_twopi_default $TwoPiRoot/bin/activate_twopi
 
