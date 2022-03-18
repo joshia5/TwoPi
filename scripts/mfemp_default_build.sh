@@ -6,6 +6,8 @@ source $SCRIPT
 _usage() {
     echo 'MFEM : parallel build (with metis/hypre)'
     echo '   options: --with-cuda (nvcc must be found on PATH)'
+    echo '            --with-suitesparse'
+    echo '            --with-pumi'
 }
 
 SRCDIR=${TwoPiRoot}/src
