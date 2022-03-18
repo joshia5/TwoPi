@@ -74,6 +74,8 @@ else
    mkdir -p $TwoPiRoot/bin
    mkdir -p $TwoPiRoot/etc
    ln -s $INTERPRETER $TwoPiRoot/bin/python
+   ln -s $(dirname $INTERPRETER)/python3-config $TwoPiRoot/bin/python3-config
+   ln -s $(dirname $INTERPRETER)/python3-config $TwoPiRoot/bin/python-config   
 fi
 
 echo $TwoPiDevice > $TwoPiRoot/etc/devicename
