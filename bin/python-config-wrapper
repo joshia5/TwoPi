@@ -9,7 +9,9 @@ TMP=$(dirname $SC)/python
 REALPYTHON=$(python -c 'import os,sys;print(os.path.realpath("'"${TMP}"'"))')
 
 CONFIG=$(dirname ${REALPYTHON})/python3-config
-COMM=${CONFIG}" ""$@"
-eval ${COMM}
+
+COMM="$CONFIG"" ""$@"
+OUT=$(eval $COMM)
+echo ${OUT}
 
 
