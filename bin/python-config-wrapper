@@ -1,0 +1,15 @@
+#!/bin/bash
+#
+#  python3-config wrapper
+#  follow the link of python in the same directory to find python-config and execute it
+#
+SC=${BASH_SOURCE[0]}
+
+TMP=$(dirname $SC)/python
+REALPYTHON=$(python -c 'import os,sys;print(os.path.realpath("'"${TMP}"'"))')
+
+CONFIG=$(dirname ${REALPYTHON})/python3-config
+COMM=${CONFIG}" ""$@"
+eval ${COMM}
+
+
