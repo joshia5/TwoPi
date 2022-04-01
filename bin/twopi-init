@@ -74,6 +74,7 @@ else
    mkdir -p $TwoPiRoot/bin
    mkdir -p $TwoPiRoot/etc
    ln -s $INTERPRETER $TwoPiRoot/bin/python
+   ln -s $INTERPRETER $TwoPiRoot/bin/python3   
 fi
 
 echo $TwoPiDevice > $TwoPiRoot/etc/devicename
@@ -83,6 +84,7 @@ cp bin/twopi-config $TwoPiRoot/bin
 cp bin/python-config-wrapper $TwoPiRoot/bin/python3-config
 
 cp scripts/activation_scripts/activate_twopi_default $TwoPiRoot/bin/activate_twopi
+cp scripts/activation_scripts/configure_env.sh $TwoPiRoot/bin/configure_env.sh
 
 cp scripts/hg $TwoPiRoot/bin
 
