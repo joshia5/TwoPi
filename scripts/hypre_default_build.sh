@@ -52,7 +52,8 @@ COMM=${CMAKE}" .. -DCMAKE_VERBOSE_MAKEFILE=1                             \
           -DBUILD_SHARED_LIBS=1                                          \
           -DHYPRE_INSTALL_PREFIX=${TwoPiRoot}                            \
           -DHYPRE_SHARED=1                                               \
-	  -DCMAKE_C_COMPILER=${C_COMPILER}                               \
+	  -DMPI_C_COMPILER=${MPICC}                                      \
+	  -DCMAKE_C_COMPILER=${CC}                                       \
           -DCMAKE_INSTALL_PREFIX=${TwoPiRoot}                            \
           -DCMAKE_INSTALL_NAME_DIR=${TwoPiRoot}/lib"     
 
