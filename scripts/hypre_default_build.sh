@@ -15,8 +15,12 @@ do
 key="$1"
 case $key in
     --with-cuda)
-    ENABLE_CUDA=YES
-    C_COMPILER=${CC} 	
+      HOST_COMPILER=$(command -v ${MPICXX})		
+      CUDA_OPTS=" -DHYPRE_WITH_CUDA=YES"
+      CUDA_OPTS=${CUDA_OPTS}" -DCMAKE_CUDA_HOST_COMPILER=""${HOST_COMPILER}"      
+      if [ -n "${CUDA_ARCH}" ]; then
+	CUDA_OPTS="${CUDA_OPTS}"" -DCMAKE_CUDA_ARCHITECTURES=""${CUDA_ARCH}"
+      fi
     shift # past argument    	
     ;;
     --help)
@@ -44,17 +48,18 @@ HYPREDIR=${SRCDIR}/hypre-${HYPRE_VERSION}
 mkdir -p ${HYPREDIR}/src/cmbuild
 cd ${HYPREDIR}/src/cmbuild
 
-$CMAKE .. -DCMAKE_VERBOSE_MAKEFILE=1                                     \
+COMM=${CMAKE}" .. -DCMAKE_VERBOSE_MAKEFILE=1                             \
           -DBUILD_SHARED_LIBS=1                                          \
           -DHYPRE_INSTALL_PREFIX=${TwoPiRoot}                            \
           -DHYPRE_SHARED=1                                               \
-          -DHYPRE_WITH_CUDA=${ENABLE_CUDA}                               \
 	  -DCMAKE_C_COMPILER=${C_COMPILER}                               \
           -DCMAKE_INSTALL_PREFIX=${TwoPiRoot}                            \
-          -DCMAKE_INSTALL_NAME_DIR=${TwoPiRoot}/lib                            
+          -DCMAKE_INSTALL_NAME_DIR=${TwoPiRoot}/lib"     
 
-# I am not sure if this works...
-# -DCMAKE_C_COMPILER=$MPICC -DCMAKE_CXX_COMPILER=$MPICXX
+COMM=${COMM}"${CUDA_OPTS}"
+
+echo "executing ..."${COMM}
+eval ${COMM}
 
 $MAKE verbose=1
 $MAKE install
