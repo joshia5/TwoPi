@@ -19,7 +19,7 @@ case $key in
       CUDA_OPTS=" -DHYPRE_WITH_CUDA=YES"
       CUDA_OPTS=${CUDA_OPTS}" -DCMAKE_CUDA_HOST_COMPILER=""${HOST_COMPILER}"      
       if [ -n "${CUDA_ARCH}" ]; then
-	CUDA_OPTS="${CUDA_OPTS}"" -DCMAKE_CUDA_ARCHITECTURES=""${CUDA_ARCH}"
+	CUDA_OPTS="${CUDA_OPTS}"" -DHYPRE_CUDA_SM=""${CUDA_ARCH}"
       fi
     shift # past argument    	
     ;;
