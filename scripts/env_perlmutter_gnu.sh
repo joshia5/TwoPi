@@ -1,17 +1,17 @@
 #!/bin/bash
-CC=nvc
-CXX=nvc++
-FC=nvfortran
-FL=nvfortran
+CC=gcc
+CXX=g++
+FC=gfortran
+FL=gfortran
 MPICC=cc
 MPICXX=CC
 MPIFC=ftn
 MPIFL=ftn
-OMPFLAG="-fast -mp=gpu -gpu=cc80"
-OMPLINKFLAG="-fast -mp=gpu -gpu=cc80"
-OMPCXXFLAG=-"-fast -mp=gpu -gpu=cc80"
-OMPCCFLAG=-"-fast -mp=gpu -gpu=cc80"
-OMPFCFLAG="-fast -mp=gpu -gpu=cc80"
+OMPFLAG="-fopenmp"
+OMPLINKFLAG="-fopenmp"
+OMPCXXFLAG=-"-fopenmp"
+OMPCCFLAG=-"-fopenmp"
+OMPFCFLAG="-fopenmp"
 
 source $(dirname $BASH_SOURCE)/env_common.sh
 
