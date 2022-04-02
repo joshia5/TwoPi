@@ -8,8 +8,7 @@ _usage() {
     echo '   options: --with-cuda (nvcc must be found on PATH)'
 }
 
-ENABLE_CUDA="NO"
-C_COMPILER=${MPICC} 
+
 while [[ $# -gt 0 ]]
 do
 key="$1"
@@ -38,7 +37,7 @@ GIT=$(command -v git)
 SRCDIR=${TwoPiRoot}/src
 CMAKE=$(command -v cmake)
 MAKE=$(command -v make)
-HOST_COMPILER=$(command -v ${MPICC})
+
 
 HYPREDIR=${SRCDIR}/hypre-${HYPRE_VERSION}
 
