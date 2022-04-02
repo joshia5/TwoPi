@@ -62,7 +62,7 @@ COMM=${COMM}"${CUDA_OPTS}"
 echo "executing ..."${COMM}
 eval ${COMM}
 
-$MAKE verbose=1
+$MAKE $MAKEOPT
 $MAKE install
 
 cd $TwoPiRoot/lib
