@@ -81,7 +81,8 @@ COMM=${CMAKE}" .. -DCMAKE_VERBOSE_MAKEFILE=1                   \
  	  -DPUMI_DIR=${TwoPiRoot}                              \
           -DMFEM_USE_SUITESPARSE=${WITH_SUITESPARSE}           \
           -DSuiteSparse_DIR=${TwoPiRoot}                       \
-          -DCMAKE_CXX_COMPILER=$MPICXX                         \
+          -DMPI_CXX_COMPILER=$MPICXX                           \
+          -DCMAKE_CXX_COMPILER=$CXX                            \
           -DCMAKE_CXX_FLAGS=$CXX11FLAG                         \
 	  -DCMAKE_SHARED_LINKER_FLAGS=${METIS_HYPRE_LINK}      \
 	  -DCMAKE_EXE_LINKER_FLAGS=${METIS_HYPRE_LINK}         \
