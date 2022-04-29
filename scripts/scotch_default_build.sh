@@ -137,13 +137,16 @@ $MAKE esmumps CCS="$CC" CCP="$MPICC" CCD="$CCD"
 $MAKE ptesmumps CCS="$CC" CCP="$MPICC" CCD="$CCD"
 $MAKE install prefix="$TwoPiRoot"
 
+echo "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
 CMAKELIST=$(dirname "$MYPATH")/../extra/scotch/CMakeLists.txt
 cp $CMAKELIST ${REPO}/src/CMakeLists.txt
 mkdir -p ${REPO}/src/cmbuild
 cd ${REPO}/src/cmbuild
 cmake .. -DCMAKE_INSTALL_NAME_DIR=${TwoPiRoot}/lib \
          -DCMAKE_INSTALL_RPATH=${TwoPiRoot}/lib   \
-         -DCMAKE_INSTALL_PREFIX=${TwoPiRoot}
+         -DCMAKE_INSTALL_PREFIX=${TwoPiRoot}  \
+         -DCMAKE_CXX_COMPILER=${MPICXX}      \
+         -DCMAKE_C_COMPILER=${MPICC}
 
 make VERBOSE=1
 make install
