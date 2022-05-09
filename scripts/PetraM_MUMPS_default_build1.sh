@@ -48,6 +48,14 @@ else
 fi
 echo $PWD
 
+if [ ${USE_DEBUG} = "ON" ]; then
+    CMAKE_BUILD_TYPE='Debug'
+else
+    CMAKE_BUILD_TYPE='Release'
+fi
+
+echo buid-type ${CMAKE_BUILD_TYPE}
+
 cmake .. -DCMAKE_INSTALL_NAME_DIR=${TwoPiRoot}/lib  \
          -DCMAKE_INSTALL_PREFIX=${TwoPiRoot}        \
          -DUSE_SCOTCH=${USE_SCOTCH}                 \
@@ -60,7 +68,8 @@ cmake .. -DCMAKE_INSTALL_NAME_DIR=${TwoPiRoot}/lib  \
          -DCMAKE_CXX_COMPILER=${CXX1} \
 	 -DCMAKE_C_COMPILER=${CC1}   \
          -DMUMPSSOLVE_USE_MPISEQ=${MUMPSSOLVE_USE_MPISEQ}  \
-         -DCMAKE_CXX_STANDARD=11
+         -DCMAKE_CXX_STANDARD=11  \
+	 -DCMAKE_BUILD_TYPE=${CMAKE_BUILD_TYPE}
 
 make VERBOSE=1
 make install

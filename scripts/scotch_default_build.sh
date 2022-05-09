@@ -17,7 +17,8 @@ _usage() {
     echo '   options: --debug (add -g)'
     echo '   options: --O0    (-O3 is replace to -O0)'
     echo '   options: --O1    (-O3 is replace to -O1)'
-    echo '   options: --O2    (-O3 is replace to -O2)'    
+    echo '   options: --O2    (-O3 is replace to -O2)'
+    echo '   options: --test  (run test)'
 }
 
 
@@ -28,6 +29,7 @@ _USE_DEBUG="OFF"
 _USE_O0="OFF"
 _USE_O1="OFF"
 _USE_O2="OFF"
+_DO_TEST="OFF"
 while [[ $# -gt 0 ]]
 do
 key="$1"
@@ -60,6 +62,10 @@ case $key in
     _USE_O0="ON"	
     shift # past param
     ;;
+    --test)
+    _DO_TEST="ON"
+    shift # past param
+    ;;
     --help)
     _usage
     exit 1
@@ -80,6 +86,14 @@ echo "MPI include path: "$MPI_INCLUDE_PATH
 MYPATH=$BASH_SOURCE
 echo $MYPATH
 
+if [[ "${_DO_TEST}" == "ON" ]]; then
+    cd ${REPO}/src
+    CCD="$CC -I$MPI_INCLUDE_PATH"
+    $MAKE check CCS="$CC" CCP="$MPICC" CCD="$CCD"
+    $MAKE ptcheck CCS="$CC" CCP="$MPICC" CCD="$CCD"
+    exit 0
+fi
+
 MAKEINC=$(dirname "$MYPATH")/../extra/scotch/scotch_${TwoPiDevice}_Makefile.inc
 if [ ! -f $MAKEINC ]; then
    MAKEINC=$(dirname "$MYPATH")/../extra/scotch/scotch_default_Makefile.inc
@@ -87,26 +101,31 @@ fi
 cp $MAKEINC ${REPO}/src/Makefile.inc
 cd ${REPO}/src
 
+BKEXT=''
+if [[ "${TwoPiDevice}" == "brew" ]]; then
+  BKEXT='.bu'   ### On MacOS, -i option needs extension.
+fi
+
 if [[ "${_USE_SCOTCH_PTHREAD}" != "ON" ]]; then
-    sed -i 's/-DSCOTCH_PTHREAD//g' Makefile.inc
+    sed -i${BKEXT} 's/-DSCOTCH_PTHREAD//g' Makefile.inc
 fi
 if [[ "${_USE_INT64}" == "ON" ]]; then
-    sed -i 's/-DIDXSIZE64/-DINTSIZE64 -DIDXSIZE64/g' Makefile.inc
+    sed -i${BKEXT} 's/-DIDXSIZE64/-DINTSIZE64 -DIDXSIZE64/g' Makefile.inc
 fi
 if [[ "${_USE_INT32}" == "ON" ]]; then
-    sed -i 's/-DIDXSIZE64/-DINTSIZE32 -DIDXSIZE64/g' Makefile.inc
+    sed -i${BKEXT} 's/-DIDXSIZE64/-DINTSIZE32 -DIDXSIZE64/g' Makefile.inc
 fi
 if [[ "${_USE_DEBUG}" == "ON" ]]; then
-    sed -i 's/-O3/-g -O3/g' Makefile.inc
+    sed -i${BKEXT} 's/-O3/-g -O3/g' Makefile.inc
 fi
 if [[ "${_USE_O2}" == "ON" ]]; then
-    sed -i 's/-O3/-O2/g' Makefile.inc
+    sed -i${BKEXT} 's/-O3/-O2/g' Makefile.inc
 fi
 if [[ "${_USE_O1}" == "ON" ]]; then
-    sed -i 's/-O3/-O1/g' Makefile.inc
+    sed -i${BKEXT} 's/-O3/-O1/g' Makefile.inc
 fi
 if [[ "${_USE_O0}" == "ON" ]]; then
-    sed -i 's/-O3/-O0/g' Makefile.inc
+    sed -i${BKEXT} 's/-O3/-O0/g' Makefile.inc
 fi
 
 ###

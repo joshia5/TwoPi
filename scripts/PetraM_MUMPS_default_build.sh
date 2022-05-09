@@ -7,7 +7,8 @@ _usage() {
     echo '            --eneable-scotch (default)'
     echo '            --disable-scotch '
     echo '            --enable-metis (default)'
-    echo '            --disable-metis'        
+    echo '            --disable-metis'
+    echo '            --debug (use debug flag)'            
     echo '            --help'
 }
 
@@ -26,6 +27,7 @@ source $SCRIPT
 
 DO_SWIG=false
 DO_CLEAN_SWIG=false
+_USE_DEBUG="OFF"
 _USE_SCOTCH="ON"
 _USE_METIS="ON"
 
@@ -57,6 +59,10 @@ case $key in
     _USE_METIS="OFF"
     shift # past argument    
     ;;
+    --debug)
+    _USE_DEBUG="ON"	
+    shift # past argument    
+    ;;
     --help)
     _usage
     exit 1
@@ -85,6 +91,7 @@ fi
 ### this are used in build1
 export USE_METIS=${_USE_METIS}
 export USE_SCOTCH=${_USE_SCOTCH}
+export USE_DEBUG=${_USE_DEBUG}
 
 SCRIPT=$(dirname "$0")/buildcomponent.sh
 ${SCRIPT} PetraM_MUMPS build1

@@ -11,10 +11,20 @@ _usage() {
     echo '            --run-swig'
     echo '            --with-pumi'
     echo '            --pumi-prefix'
+    echo '            --with-suitesparse'
+    echo '            --with-cuda'    
     echo '            --dry-run'        
     
 }
 
+if [ -z "${PYTHON+xxx}" ]; then
+    #echo "VAR is not set at all";
+    PYTHON=`which python`
+fi
+if [ -z "$PYTHON" ] && [ "${PYTHON+xxx}" = "xxx" ]; then
+    #echo "VAR is set but empty"; 
+    PYTHON=`which python`
+fi
 
 DO_SERIAL=false
 DO_PARALLEL=false
@@ -25,6 +35,8 @@ DRY_RUN=''
 
 PUMI_PREFIX=""
 ENBLE_PUMI=""
+ENABLE_SUITESPARSE=""
+ENABLE_CUDA=""
 
 while [[ $# -gt 0 ]]
 do
@@ -62,6 +74,14 @@ case $key in
     shift # past argument    
     shift # past param
     ;;
+    --with-suitesparse)
+    ENABLE_SUITESPARSE="--with-suitesparse --suitesparse-prefix="${TwoPiRoot}
+    shift # past argument
+    ;;
+    --with-cuda)
+    ENABLE_CUDA="--with-cuda"
+    shift # past argument
+    ;;
     --help)
     _usage
     exit 1
@@ -90,54 +110,70 @@ export MPICXX=${MPICXX}
 export CXX11FLAG=$CXX11FLAG
 
 if $DO_CLEAN_SWIG ;then
-    python setup.py clean --swig $DRY_RUN
+    ${PYTHON} setup.py clean --swig $DRY_RUN
     exit 0
 fi
 
 if $DO_SWIG ;then
-    python setup.py install --swig               \
-	   --with-parallel                       \
-           --mfem-prefix=${TwoPiRoot}/mfem       \
-           --mfemp-prefix=${TwoPiRoot}/mfem/par  \
-           --mfems-prefix=${TwoPiRoot}/mfem/ser  \
-           $DRY_RUN
+    ${PYTHON} setup.py install --swig               \
+	      --with-parallel                       \
+              --prefix=${TwoPiRoot}                 \
+              --mfem-prefix=${TwoPiRoot}/mfem       \
+              --mfemp-prefix=${TwoPiRoot}/mfem/par  \
+              --mfems-prefix=${TwoPiRoot}/mfem/ser  \
+              --mfem-source=${TwoPiRoot}/src/mfem   \
+              --hypre-prefix=${TwoPiRoot}           \
+              --metis-prefix=${TwoPiRoot}           \
+    	      $ENABLE_CUDA                          \
+              $DRY_RUN
     
     exit 0
 fi
 
 if $DO_SERIAL;then
-    python setup.py install                      \
+    ${PYTHON} setup.py install                   \
+           --prefix=${TwoPiRoot}                 \
 	   --mfem-prefix-no-swig                 \
            --mfem-prefix=${TwoPiRoot}/mfem       \
            --mfemp-prefix=${TwoPiRoot}/mfem/par  \
            --mfems-prefix=${TwoPiRoot}/mfem/ser  \
+           --mfem-source=${TwoPiRoot}/src/mfem   \
+	   $ENABLE_CUDA                          \  
 	   $DRY_RUN
 fi
 
 if $DO_PARALLEL ;then
-    python setup.py install                             \
+    ${PYTHON} setup.py install                          \
            --mfem-prefix-no-swig                        \
            --no-serial                                  \
            --with-parallel                              \
+           --prefix=${TwoPiRoot}                        \
            --mfem-prefix=${TwoPiRoot}/mfem              \
            --mfemp-prefix=${TwoPiRoot}/mfem/par         \
            --mfems-prefix=${TwoPiRoot}/mfem/ser         \
 	   --hypre-prefix=${TwoPiRoot}                  \
 	   --metis-prefix=${TwoPiRoot}                  \
+           --mfem-source=${TwoPiRoot}/src/mfem          \
 	   $ENABLE_PUMI $PUMI_PREFIX                    \
+           $ENABLE_SUITESPARSE                          \
+	   $ENABLE_CUDA                                 \
 	   $DRY_RUN	   
 fi
 
 if $DO_DEFAULT ;then
-    python setup.py install                             \
+    ${PYTHON} setup.py install                          \
            --mfem-prefix-no-swig                        \
            --with-parallel                              \
+           --prefix=${TwoPiRoot}                        \
            --mfem-prefix=${TwoPiRoot}/mfem              \
            --mfemp-prefix=${TwoPiRoot}/mfem/par         \
            --mfems-prefix=${TwoPiRoot}/mfem/ser         \
+           --mfem-source=${TwoPiRoot}/src/mfem          \
 	   --hypre-prefix=${TwoPiRoot}                  \
 	   --metis-prefix=${TwoPiRoot}                  \
 	   $ENABLE_PUMI $PUMI_PREFIX                    \
+           $ENABLE_SUITESPARSE                          \
+ 	   $ENABLE_CUDA                                 \
 	   $DRY_RUN	   	   
 fi
 

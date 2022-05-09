@@ -29,6 +29,7 @@ PISCOPE_BRANCH=master
 NO_WX=""
 NO_PYTHON_MOD=0
 NO_OCC_GMSH=0
+NO_PYOCC=0
 LOGDIR=$HOME/TwoPiInstallLog
 
 while [[ $# -gt 0 ]]
@@ -73,6 +74,10 @@ case $key in
     NO_OCC_GMSH=1
     shift # past param    
     ;;
+    --no-pyocc)
+    NO_PYOCC=1
+    shift # past PyOCC
+    ;;
     --help)
     _usage
     exit 1
@@ -113,6 +118,13 @@ else
     echo skiping OOC/gmsh
 fi
 
+if [[ "$NO_PYOCC" -eq "1" ]]; then
+    echo skiping PyOCC    
+else
+    echo Installing PyOCC
+    $TWOPI install PyOCC | tee $LOGDIR/PyOCC.log
+fi
+
 echo Installing hypre
 $TWOPI install hypre      | tee $LOGDIR/hypre.log
 
@@ -123,7 +135,7 @@ echo Installing parmetis
 $TWOPI install parmetis   | tee $LOGDIR/parmetis.log 
 
 echo Installing MUMPS
-$TWOPI install-noclean MUMPS      | tee $LOGDIR/MUMPS.log 
+$TWOPI install-noclean MUMPS --disable-scotch  | tee $LOGDIR/MUMPS.log 
 
 echo Downloading MFEM
 $TWOPI clone mfem         | tee  $LOGDIR/mfem_clone.log 
@@ -156,4 +168,4 @@ $TWOPI build PetraM_RF
 
 echo PetraM_MUMPS
 $TWOPI clone PetraM_MUMPS   |tee $LOGDIR/PetraM_MUMPS.log 2>&1
-$TWOPI build PetraM_MUMPS
+$TWOPI build PetraM_MUMPS --disable-scotch

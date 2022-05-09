@@ -5,7 +5,8 @@ _usage() {
     echo '            --eneable-scotch (default)'
     echo '            --disable-scotch'
     echo '            --enable-metis (default)'
-    echo '            --disable-metis'        
+    echo '            --disable-metis'
+    echo '            --debug (-g option)'
     echo '            --help'
 }
 
@@ -20,6 +21,7 @@ source $SCRIPT
 
 _USE_SCOTCH="ON"
 _USE_METIS="ON"
+_USE_DEBUG="OFF"
 
 while [[ $# -gt 0 ]]
 do
@@ -40,6 +42,10 @@ case $key in
     --disable-metis)
     _USE_METIS="OFF"
     shift # past argument    
+    ;;
+    --debug)
+    _USE_DEBUG="ON"
+    shift # past argument
     ;;
     --help)
     _usage
@@ -83,22 +89,30 @@ cp $MAKEINC ${REPO}/Makefile.inc
 cd ${REPO}
 
 ORDERING="-Dport"
+BKEXT=''
+if [[ "${TwoPiDevice}" == "brew" ]]; then
+  BKEXT='.bu'   ### On MacOS, -i option needs extension.
+fi
 if [[ "${_USE_SCOTCH}" == "ON" ]]; then
-    sed -i 's,#SCOTCHDIR  = ${HOME}/scotch_6.0,SCOTCHDIR=${TwoPiRoot},g' Makefile.inc
-    sed -i 's,#ISCOTCH    = -I$(SCOTCHDIR)/include,ISCOTCH    = -I$(SCOTCHDIR)/include,g' Makefile.inc
-    sed -i 's,#LSCOTCH    = -L$(SCOTCHDIR)/lib -lptesmumps -lptscotch -lptscotcherr,LSCOTCH    = -L$(SCOTCHDIR)/lib -lptesmumps -lptscotch -lptscotcherr -lscotch,g' Makefile.inc
+    sed -i${BKEXT} 's,#SCOTCHDIR  = ${HOME}/scotch_6.0,SCOTCHDIR=${TwoPiRoot},g' Makefile.inc
+    sed -i${BKEXT} 's,#ISCOTCH    = -I$(SCOTCHDIR)/include,ISCOTCH    = -I$(SCOTCHDIR)/include,g' Makefile.inc
+    sed -i${BKEXT} 's,#LSCOTCH    = -L$(SCOTCHDIR)/lib -lptesmumps -lptscotch -lptscotcherr,LSCOTCH    = -L$(SCOTCHDIR)/lib -lptesmumps -lptscotch -lptscotcherr -lscotch,g' Makefile.inc
     ORDERING="-Dscotch "${ORDERING}" -Dptscotch"
 fi
 if [[ "${_USE_METIS}" == "ON" ]]; then
-    sed -i 's,#LMETISDIR = /opt/metis-5.1.0/build/Linux-x86_64/libmetis,METISDIR=${TwoPiRoot},g' Makefile.inc
-    sed -i 's,#IMETIS    = /opt/metis-5.1.0/include,IMETIS   = -I$(METISDIR)/include,g' Makefile.inc
-    sed -i 's,#LMETIS    = -L$(LMETISDIR) -lparmetis -lmetis,LMETIS    = -L$(METISDIR)/lib -lparmetis -lmetis,g' Makefile.inc
+    sed -i${BKEXT} 's,#LMETISDIR = /opt/metis-5.1.0/build/Linux-x86_64/libmetis,METISDIR=${TwoPiRoot},g' Makefile.inc
+    sed -i${BKEXT} 's,#IMETIS    = /opt/metis-5.1.0/include,IMETIS   = -I$(METISDIR)/include,g' Makefile.inc
+    sed -i${BKEXT} 's,#LMETIS    = -L$(LMETISDIR) -lparmetis -lmetis,LMETIS    = -L$(METISDIR)/lib -lparmetis -lmetis,g' Makefile.inc
     ORDERING="-Dmetis "${ORDERING}" -Dparmetis"    
 fi
-sed -i "s,ORDERINGSF  = -Dpord,ORDERINGSF  = $ORDERING,g" Makefile.inc
+sed -i${BKEXT} "s,ORDERINGSF  = -Dpord,ORDERINGSF  = $ORDERING,g" Makefile.inc
 
-$MAKE alllib MPICC=${MPICC} MPIFC=${MPIFC} OMPFCFLAG=${OMPFCFLAG} \
-      OMPLINKFLAG=${OMPLINKFLAG} OMPCCFLAG=${OMPCCFLAG} $MAKEOPT
+if [[ "${_USE_DEBUG}" == "ON" ]]; then
+    sed -i${BKEXT} 's,OPTF    = -O,OPTF    = -g,g' Makefile.inc
+    sed -i${BKEXT} 's,OPTC    = -O,OPTC    = -g,g' Makefile.inc
+    sed -i${BKEXT} 's,OPTL    = -O,OPTL    = -g,g' Makefile.inc
+fi
+
 $MAKE all MPICC=${MPICC} MPIFC=${MPIFC} MPIFL=${MPIFL} \
       OMPFCFLAG=${OMPFCFLAG} \
       OMPLINKFLAG=${OMPLINKFLAG} OMPCCFLAG=${OMPCCFLAG} $MAKEOPT

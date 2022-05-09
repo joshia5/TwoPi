@@ -14,7 +14,8 @@ MAKE=$(command -v make)
 cd $REPO
 
 
-make MUMPS_SOLVE_DIR=${TwoPiRoot}/lib \
+make PREFIX=${TwoPiRoot}   \
+     MUMPS_SOLVE_DIR=${TwoPiRoot}/lib \
      MUMPS_INC_DIR=${TwoPiRoot}/src/${MUMPS_REPO}/include \
      MPICXX=${MPICXX} \
      MPICC=${MPICC}  

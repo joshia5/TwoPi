@@ -78,27 +78,26 @@ LIBEXT  = .a
 OUTC    = -o 
 OUTF    = -o 
 RM = /bin/rm -f
-CC = cc
-FC = ftn
-FL = ftn
+CC = mpiicc
+FC = mpiifort
+FL = mpiifort
 AR = ar vr 
 RANLIB = ranlib
 # Make this variable point to the path where the Intel MKL library is
 # installed. It is set to the default install directory for Intel MKL. 
 #MKLROOT=/opt/intel/mkl/lib/intel64
-#MKLROOT=/home/software/intel/2017-01/compilers_and_libraries_2017.1.132/linux/mkl/lib/intel64
-#LAPACK = -llapack
+MKLROOT=/mpcdf/soft/SLE_15/packages/x86_64/intel_oneapi/2021.3/mkl/2021.3.0
+LAPACK = 
 
-#SCALAP = -lscalapack
-#INCPAR = -I/usr/lib/openmpi/include
-INCPAR = 
+SCALAP = $(MKL_SCALAPACK_LINK)
+INCPAR = -I$(MKLROOT)/include
 LIBPAR = $(SCALAP) 
 
 INCSEQ = -I$(topdir)/libseq
 LIBSEQ  = $(LAPACK) -L$(topdir)/libseq -lmpiseq
 
-#LIBBLAS = -lblas
-LIBOTHERS = -lpthread
+LIBBLAS = $(MKL_SCALAPACK_LINK)
+LIBOTHERS = -lpthread -lm -ldl
 
 #Preprocessor defs for calling Fortran from C (-DAdd_ or -DAdd__ or -DUPPER)
 CDEFS   = -DAdd_
@@ -106,8 +105,8 @@ CDEFS   = -DAdd_
 #Begin Optimized options
 # uncomment -fopenmp in lines below to benefit from OpenMP
 # -nofor_main (intel compiler option to use MUMPS from C main)
-OPTF    = -O -fPIC -DBLR_MT -nofor_main -qopenmp # -fopenmp
-OPTL    = -O -fPIC -DBLR_MT -nofor_main -qopenmp # -fopenmp
+OPTF    = -O -fPIC -DBLR_MT -nofor-main -qopenmp # -fopenmp
+OPTL    = -O -fPIC -DBLR_MT -nofor-main -qopenmp # -fopenmp
 OPTC    = -O -fPIC -qopenmp# -fopenmp
 #End Optimized options
 INCS = $(INCPAR)

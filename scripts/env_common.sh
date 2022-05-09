@@ -2,6 +2,25 @@
 
 # common envriomental variables
 
+#
+# We use ${PYTHON} as much as possible in this build-system
+#   * python may point system python which could be 2.7
+#   * ${TwoPiRoot}/bin/python may be a source of trobule in future..
+#
+
+if [ -z "${PYTHON+xxx}" ]; then
+    #echo "VAR is not set at all";
+    PYTHON=`which python`
+fi
+if [ -z "$PYTHON" ] && [ "${PYTHON+xxx}" = "xxx" ]; then
+    #echo "VAR is set but empty"; 
+    PYTHON=`which python`
+fi
+
+#
+#  REPO and versions
+#
+
 piScope_REPO=piScope
 
 # Strumpack
@@ -18,23 +37,24 @@ PyOCC=pythonocc-core
 GMSH=gmsh-4.5.6
 
 # HYPRE
-HYPRE_VERSION=2.18.2
+HYPRE_VERSION=2.24.0
 
 # MUMPS
-MUMPS_VERSION=5.3.4
+MUMPS_VERSION=5.4.1
 MUMPS_REPO=MUMPS_${MUMPS_VERSION}
 
 # SCOTCH
-#    SCOTCH_DL is encoded in the download link.
-#    It needs to be updated when updating scotch version
-SCOTCH_DL=38352
-SCOTCH_VERSION=6.1.0
+SCOTCH_VERSION=6.1.1
 
 # Lapack
 LAPACK_VERSION=3.9.0
 
 # Scalapack
 SCALAPACK_VERSION=2.1.0
+
+# SuiteSparse
+SUITESPARSE_VERSION=5.11.0
+SUITESPARSE_REPO=SuiteSparse-${SUITESPARSE_VERSION}
 
 # ButterflyPack
 BUTTERFLYPACK_VERSION=1.2.1
@@ -50,3 +70,7 @@ CXX11FLAG=-std=c++11
 # make runs using the half of processor cores
 NPROCHALF=$((($(nproc)+1)/2))
 MAKEOPT="-j "${NPROCHALF}
+
+# CUDA_ARCHITECUTRES (will be passed by DCMAKE_CUDA_ARCHITECTURES)
+CUDA_ARCH=
+
