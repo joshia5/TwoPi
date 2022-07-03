@@ -34,7 +34,7 @@ OCC=opencascade-7.4.0
 PyOCC=pythonocc-core
 
 # GMSH
-GMSH=gmsh-4.5.6
+GMSH=gmsh-4.10.5
 
 # HYPRE
 HYPRE_VERSION=2.24.0
