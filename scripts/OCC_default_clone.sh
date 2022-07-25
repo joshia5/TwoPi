@@ -32,9 +32,11 @@ echo $MYPATH
 SC=$(dirname "$0")/subs/git_access.sh
 source $SC
 
+cd ${SRCDIR}/${REPO}
+
 if [ ! -d ${SRCDIR}/${REPO} ]; then
     git_clone_or_pull  "https://git.dev.opencascade.org/repos/occt.git" $REPO $SRCDIR
 fi
-cd ${SRCDIR}/${REPO}
+
 $GIT checkout master 
 $GIT checkout ${OCCTAG} 
