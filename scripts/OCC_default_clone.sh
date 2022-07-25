@@ -35,4 +35,5 @@ source $SC
 if [ ! -f ${SRCDIR}/${REPO} ]; then
     git_clone_or_pull  "https://git.dev.opencascade.org/repos/occt.git" $REPO $SRCDIR
 fi
+$GIT checkout master 
 $GIT checkout ${OCCTAG} 
