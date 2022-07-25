@@ -29,6 +29,8 @@ echo $MYPATH
 #    rm -rf  ${SRCDIR}/${OCCFILE}
 #fi
 
+SC=$(dirname "$0")/subs/git_access.sh
+source $SC
 
 git_clone_or_pull  "https://git.dev.opencascade.org/repos/occt.git" $REPO $SRCDIR
 $GIT checkout ${OCCTAG} 
