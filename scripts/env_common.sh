@@ -30,6 +30,7 @@ STRUMPACK_REPO=STRUMPACK-${STRUMPACK_VERSION}
 # OpenCASCADE
 OCC=opencascade-7.5.0
 OCC=occt
+OCCTAG=V7_5_1
 
 # Python OCC
 PyOCC=pythonocc-core
