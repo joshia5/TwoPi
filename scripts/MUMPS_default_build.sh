@@ -102,7 +102,7 @@ fi
 if [[ "${_USE_METIS}" == "ON" ]]; then
     sed -i${BKEXT} 's,#LMETISDIR = /opt/metis-5.1.0/build/Linux-x86_64/libmetis,METISDIR=${TwoPiRoot},g' Makefile.inc
     sed -i${BKEXT} 's,#IMETIS    = /opt/metis-5.1.0/include,IMETIS   = -I$(METISDIR)/include,g' Makefile.inc
-    sed -i${BKEXT} 's,#LMETIS    = -L$(LMETISDIR) -lparmetis -lmetis,LMETIS    = -L$(METISDIR)/lib -lparmetis -lmetis,g' Makefile.inc
+    sed -i${BKEXT} 's,#LMETIS    = -L$(LMETISDIR) -lparmetis -lmetis,LMETIS    = -L$(METISDIR)/lib -lparmetis -lmetis -GLlib,g' Makefile.inc
     ORDERING="-Dmetis "${ORDERING}" -Dparmetis"    
 fi
 sed -i${BKEXT} "s,ORDERINGSF  = -Dpord,ORDERINGSF  = $ORDERING,g" Makefile.inc
