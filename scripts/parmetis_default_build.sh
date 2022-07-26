@@ -72,6 +72,8 @@ export CFLAGS="${CFLAGS} -fPIC"
 
 $MAKE config shared=1 prefix=$TwoPiRoot cc=$MPICC cxx=$MPICXX
 $MAKE $MAKEOPT
+$MAKE config prefix=$TwoPiRoot cc=$MPICC cxx=$MPICXX
+$MAKE $MAKEOPT
 $MAKE install
 
 OSTYPE=$(ostype)
