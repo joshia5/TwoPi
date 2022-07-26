@@ -48,7 +48,7 @@ case $key in
 esac
 done
 
-cd ${SRCDIR}/parmetis-4.0.3
+cd ${SRCDIR}/ParMETIS
 
 BKEXT=''
 if [[ "${TwoPiDevice}" == "brew" ]]; then

@@ -45,7 +45,7 @@ case $key in
 esac
 done
 
-cd ${SRCDIR}/metis-5.1.0
+cd ${SRCDIR}/METIS
 
 BKEXT=''
 if [[ "${TwoPiDevice}" == "brew" ]]; then
