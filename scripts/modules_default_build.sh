@@ -128,6 +128,9 @@ fi
 echo Installing hypre
 $TWOPI install hypre      | tee $LOGDIR/hypre.log
 
+echo Installing GKlib
+$TWOPI install GKlib      | tee $LOGDIR/gklib.log
+
 echo Installing metis
 $TWOPI install metis      | tee $LOGDIR/metis.log
 
