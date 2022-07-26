@@ -67,6 +67,8 @@ fi
 
 $MAKE config shared=1 prefix=$TwoPiRoot cc=${CC}
 $MAKE $MAKEOPT
+$MAKE config prefix=$TwoPiRoot cc=${CC}
+$MAKE $MAKEOPT
 $MAKE install
 
 OSTYPE=$(ostype)
