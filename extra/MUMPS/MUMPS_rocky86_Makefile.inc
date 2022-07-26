@@ -136,7 +136,7 @@ LIBSEQ  = $(LAPACK) -L$(topdir)/libseq -lmpiseq
 
 # DEFINE HERE YOUR BLAS LIBRARY
 
-LIBBLAS = -L/usr/lib64 -l/usr/lib64/libopenblas.so.0
+LIBBLAS = -L/usr/lib64/libopenblas.so.0
 
 # DEFINE HERE YOUR PTHREAD LIBRARY
 LIBOTHERS = -lpthread
