@@ -88,7 +88,7 @@ echo $MAKEINC
 cp $MAKEINC ${REPO}/Makefile.inc
 cd ${REPO}
 
-ORDERING="-Dport"
+ORDERING="-Dpord"
 BKEXT=''
 if [[ "${TwoPiDevice}" == "brew" ]]; then
   BKEXT='.bu'   ### On MacOS, -i option needs extension.
