@@ -9,6 +9,7 @@ _usage() {
     echo '            --serial'    
     echo '            --clean-swig'
     echo '            --run-swig'
+    echo '            --skip-swig (if you are okay with exsiting wrapper)'
     echo '            --with-pumi'
     echo '            --pumi-prefix'
     echo '            --with-suitesparse'
@@ -31,12 +32,14 @@ DO_PARALLEL=false
 DO_DEFAULT=true
 DO_SWIG=false
 DO_CLEAN_SWIG=false
+DO_SKIP_SWIG=false
 DRY_RUN=''
 
 PUMI_PREFIX=""
 ENBLE_PUMI=""
 ENABLE_SUITESPARSE=""
 ENABLE_CUDA=""
+NO_SWIG_FLAG=""
 
 while [[ $# -gt 0 ]]
 do
@@ -53,6 +56,10 @@ case $key in
     --run-swig)
     DO_SWIG=true
     shift # past argument    
+    ;;
+    --skip-swig)
+    NO_SWIG_FLAG="--mfem-prefix-no-swig"
+    shift # past argument
     ;;
     -s|--serial)
     DO_SERIAL=true
@@ -133,7 +140,7 @@ fi
 if $DO_SERIAL;then
     ${PYTHON} setup.py install                   \
            --prefix=${TwoPiRoot}                 \
-	   --mfem-prefix-no-swig                 \
+           $NO_SWIG_FLAG                         \
            --mfem-prefix=${TwoPiRoot}/mfem       \
            --mfemp-prefix=${TwoPiRoot}/mfem/par  \
            --mfems-prefix=${TwoPiRoot}/mfem/ser  \
@@ -144,7 +151,7 @@ fi
 
 if $DO_PARALLEL ;then
     ${PYTHON} setup.py install                          \
-           --mfem-prefix-no-swig                        \
+           $NO_SWIG_FLAG                                \
            --no-serial                                  \
            --with-parallel                              \
            --prefix=${TwoPiRoot}                        \
@@ -162,7 +169,7 @@ fi
 
 if $DO_DEFAULT ;then
     ${PYTHON} setup.py install                          \
-           --mfem-prefix-no-swig                        \
+           $NO_SWIG_FLAG                                \
            --with-parallel                              \
            --prefix=${TwoPiRoot}                        \
            --mfem-prefix=${TwoPiRoot}/mfem              \
