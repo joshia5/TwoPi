@@ -63,7 +63,7 @@ case $key in
 esac
 done
 
-METIS_HYPRE_LINK='"'-L" "${TWOPILIB}' -lHYPRE -lmetis"
+METIS_HYPRE_LINK='"'-L" "${TWOPILIB}' -lHYPRE -lmetis"'
 
 COMM=${CMAKE}" .. -DCMAKE_VERBOSE_MAKEFILE=1                   \
           -DBUILD_SHARED_LIBS=1                                \
