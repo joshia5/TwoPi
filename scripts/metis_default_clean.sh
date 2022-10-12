@@ -7,7 +7,7 @@ SRCDIR=${TwoPiRoot}/src
 CMAKE=$(command -v cmake)
 MAKE=$(command -v make)
 
-cd ${SRCDIR}/metis-5.1.0
+cd ${SRCDIR}/METIS
 $MAKE clean
 
 
