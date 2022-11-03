@@ -10,7 +10,7 @@
 _usage() {
     echo 'twopi-init : initialize twopi directory'
     echo '   -e : (optional) : python interpreter executable'
-    echo '   -o : (optional) : other virtual env option (default: --python=python2.7 --system-site-packages --unzip-setup)'
+    echo '   -o : (optional) : other virtual env option (default: --system-site-packages)'
     echo '   -n : (optional) : no virtualenv'
     echo '   -h : (optional) : show help'
     echo '   name  : name of $TwoPiDevice'
