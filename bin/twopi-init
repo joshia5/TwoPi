@@ -10,7 +10,7 @@
 _usage() {
     echo 'twopi-init : initialize twopi directory'
     echo '   -e : (optional) : python interpreter executable'
-    echo '   -o : (optional) : other virtual env option (default: --python=python2.7 --system-site-packages --unzip-setup)'
+    echo '   -o : (optional) : other virtual env option (default: --clear)'
     echo '   -n : (optional) : no virtualenv'
     echo '   -h : (optional) : show help'
     echo '   name  : name of $TwoPiDevice'
@@ -21,19 +21,20 @@ _usage() {
 INTERPRETER=$(which python)
 CALL_VENV=1
 #VENV_OPTION="--system-site-packages --unzip-setup"
-VENV_OPTION="--system-site-packages"
+#VENV_OPTION="--system-site-packages"
+VENV_OPTION="--clear"
 
-while getopts "e:o:dnh" opts
+while getopts "e:o:nh" opts
 do 
    case $opts in
-      e) INTERPRETER=$(which $OPTARG)
+     e) INTERPRETER=$(which $OPTARG)
          ;;
-      o) VENV_OPTION=$OPTARG
+     o) VENV_OPTION=$OPTARG
          ;;
-      n) CALL_VENV=0
-         ;;
-      h) _usage;;
-      :|\?) _usage;;
+     n) CALL_VENV=0
+        ;;
+     h) _usage;;
+     :|\?) _usage;;
    esac
 done
 shift $((OPTIND -1))

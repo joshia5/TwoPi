@@ -25,7 +25,10 @@ DO_LATEST=false
 # v4.3
 # SHA=9d8043b9e78dcdcd86639bbb28d3bd7b514fb5e2
 # v4.4
-SHA=a1f6902ed72552f3e680d1489f1aa6ade2e0d3b2
+#SHA=a1f6902ed72552f3e680d1489f1aa6ade2e0d3b2
+# v4.5
+SHA=b7a4b61b5ce80b326a002aebccf7da7ad2432556
+
 BRANCH=master
 
 while [[ $# -gt 0 ]]

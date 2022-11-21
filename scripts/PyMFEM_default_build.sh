@@ -58,7 +58,7 @@ case $key in
     shift # past argument    
     ;;
     --skip-swig)
-    NO_SWIG_FLAG="--mfem-prefix-no-swig"
+    NO_SWIG_FLAG="--skip-swig"
     shift # past argument
     ;;
     -s|--serial)

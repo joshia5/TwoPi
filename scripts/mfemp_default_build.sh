@@ -63,7 +63,8 @@ case $key in
 esac
 done
 
-METIS_HYPRE_LINK='"'-L" "${TWOPILIB}' -lHYPRE -lmetis -lGKlib"'
+METIS_LINK='"'-L" "${TWOPILIB}' -lmetis"'
+HYPRE_LINK='"'-L" "${TWOPILIB}' -lHYPRE"'
 
 COMM=${CMAKE}" .. -DCMAKE_VERBOSE_MAKEFILE=1                   \
           -DBUILD_SHARED_LIBS=1                                \
@@ -71,8 +72,10 @@ COMM=${CMAKE}" .. -DCMAKE_VERBOSE_MAKEFILE=1                   \
           -DCMAKE_INSTALL_PREFIX=${TwoPiRoot}/mfem/par         \
           -DHYPRE_DIR=$TWOPILIB                                \
 	  -DHYPRE_INCLUDE_DIRS=$TWOPIINC                       \
+	  -DHYPRE_LIBRARIES=${HYPRE_LINK}                      \
           -DMETIS_DIR=$TWOPILIB                                \
 	  -DMETIS_INCLUDE_DIRS=${TWOPIINC}                     \
+	  -DMETIS_LIBRARIES=${METIS_LINK}                      \
           -DMFEM_USE_ZLIB=1                                    \
           -DMFEM_USE_MPI=1                                     \
 	  -DMFEM_USE_METIS_5=1                                 \
@@ -84,8 +87,6 @@ COMM=${CMAKE}" .. -DCMAKE_VERBOSE_MAKEFILE=1                   \
           -DMPI_CXX_COMPILER=$MPICXX                           \
           -DCMAKE_CXX_COMPILER=$CXX                            \
           -DCMAKE_CXX_FLAGS=$CXX11FLAG                         \
-	  -DCMAKE_SHARED_LINKER_FLAGS=${METIS_HYPRE_LINK}      \
-	  -DCMAKE_EXE_LINKER_FLAGS=${METIS_HYPRE_LINK}         \
           -DCMAKE_INSTALL_RPATH=${TWOPILIB}:${TwoPiRoot}/mfem/par/lib \
           -DCMAKE_BUILD_WITH_INSTALL_RPATH=1"
 COMM=${COMM}"${CUDA_OPTS}"
