@@ -13,7 +13,8 @@ DO_LATEST=false
 SHA=7848ff8412c6358bf19d113cb46753ef8d96351a
 # defualt SHA (7.5.1)
 SHA=5b38e1eae3e9d69f1d81280f70f0e4e8a385ad14
-
+# defualt SHA (7.7.0)
+SHA=692373c70046e080dae0b6cccfb6e1d67a428dfd
 # branch
 BRANCH=master
 
