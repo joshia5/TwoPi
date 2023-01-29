@@ -18,3 +18,5 @@ cd $REPO/cmbuild
 $CMAKE .. -DCMAKE_INSTALL_PREFIX=${TwoPiRoot}     \
           -DCMAKE_C_COMPILER=${CC}                \
           -DCMAKE_CXX_COMPILER=${CXX}
+$MAKE VERBOSE=1 $MAKEOPT
+$MAKE install
