@@ -47,6 +47,7 @@ $CMAKE .. -DCMAKE_INSTALL_PREFIX=${TwoPiRoot}     \
           -DOCE_LIB_PATH=${OCC_LIB}               \
           -DCMAKE_C_COMPILER=${CC}                \
           -DCMAKE_CXX_COMPILER=${CXX}             \
+          -DSWIG_EXECUTABLE=${TwoPiRoot}/SWIG_4_0_2/bin/swig   \
           -DPYTHONOCC_INSTALL_DIRECTORY=${OCC_INSTALL_DIR}
 
 $MAKE VERBOSE=1 $MAKEOPT
