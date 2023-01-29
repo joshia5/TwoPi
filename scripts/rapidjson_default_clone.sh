@@ -8,7 +8,7 @@ REPO="rapidjson"
 SRCDIR=${TwoPiRoot}/src
 
 #V.1.1.0
-SHA=f54b0e47a08782a6131cc3d60f94d038fa6e0a51
+SHA=012be8528783cdbf4b7a9e64f78bd8f056b97e24
 DO_LATEST=false
 
 SC=$(dirname "$0")/subs/git_access.sh
