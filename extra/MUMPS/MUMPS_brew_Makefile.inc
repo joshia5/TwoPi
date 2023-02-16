@@ -119,11 +119,11 @@ LAPACK = -llapack
 # SCALAP should define the SCALAPACK and  BLACS libraries.
 #SCALAP  = -lscalapack -lblacs
 #SCALAP  = -L/usr/local/lib -lscalapack
-SCALAP  = $(SCALAPACK_LIB) -lscalapack
+SCALAP  = ${SCALAPACK_LIB} -lscalapack
 
 # INCLUDE DIRECTORY FOR MPI
 #INCPAR  = -I/usr/local/include/
-INCPAR  = $(BLAS_INC)
+INCPAR  = ${BLAS_INC}
 
 # LIBRARIES USED BY THE PARALLEL VERSION OF MUMPS: $(SCALAP) and MPI
 LIBPAR  = $(SCALAP) $(LAPACK) -L/usr/lib -lmpi
