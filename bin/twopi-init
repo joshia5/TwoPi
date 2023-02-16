@@ -84,9 +84,18 @@ echo $INTERPRETER > $TwoPiRoot/etc/interpreter
 cp bin/twopi-config $TwoPiRoot/bin
 cp bin/python-config-wrapper $TwoPiRoot/bin/python3-config
 
-cp scripts/activation_scripts/activate_twopi_default $TwoPiRoot/bin/activate_twopi
+if [ -f "scripts/activation_scripts/activate_twopi_"${TwoPiDevice} ]
+then
+   cp "scripts/activation_scripts/activate_twopi_"${TwoPiDevice} $TwoPiRoot/bin/activate_twopi
+else
+   cp scripts/activation_scripts/activate_twopi_default $TwoPiRoot/bin/activate_twopi    
+fi
 cp scripts/activation_scripts/configure_env.sh $TwoPiRoot/bin/configure_env.sh
 
+if [  "$(uname -s)" == "Darwin" ]
+then
+   cp scripts/subs/nproc_mac.sh $TwoPiRoot/bin/nproc
+fi
 #cp scripts/hg $TwoPiRoot/bin
 
 make install PREFIX=$TwoPiRoot
