@@ -113,7 +113,6 @@ if [[ "${_USE_DEBUG}" == "ON" ]]; then
     sed -i${BKEXT} 's,OPTL    = -O,OPTL    = -g,g' Makefile.inc
 fi
 
-echo "LLLLL"$SCALAPACK_LIB
 export SCALAPACK_LIB="${SCALAPACK_LIB}"
 export LAPACK_LIB="${LAPACK_LIB}"
 export BLAS_LIB="${BLAS_LIB}"
