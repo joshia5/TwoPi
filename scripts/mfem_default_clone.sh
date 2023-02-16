@@ -30,6 +30,7 @@ DO_LATEST=false
 #SHA=b7a4b61b5ce80b326a002aebccf7da7ad2432556
 # v4.5.x
 SHA=2f6eb8838f8f5e8359abba0dd3434c8cc7147012
+
 BRANCH=master
 
 while [[ $# -gt 0 ]]

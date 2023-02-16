@@ -88,6 +88,7 @@ COMM=${CMAKE}" .. -DCMAKE_VERBOSE_MAKEFILE=1                   \
           -DCMAKE_CXX_COMPILER=$CXX                            \
           -DCMAKE_CXX_FLAGS=$CXX11FLAG                         \
           -DCMAKE_INSTALL_RPATH=${TWOPILIB}:${TwoPiRoot}/mfem/par/lib \
+          -DCMAKE_OSX_DEPLOYMENT_TARGET=${MACOSX_DEPLOYMENT_TARGET} \
           -DCMAKE_BUILD_WITH_INSTALL_RPATH=1"
 COMM=${COMM}"${CUDA_OPTS}"
 
