@@ -34,7 +34,8 @@ else
     LAPACKFLAG=${MUMPS_BLASLAPACK_FLAG}
 fi
 
-echo ${LAPACKFLAG}
+LAPACKFLAG=$(eval "echo ${LAPACKFLAG}")
+echo "Scaapack flag"${LAPACKFLAG}
 
 if [ "${USE_SERIAL}" -eq "0" ]; then
     CC1=${MPICC}
