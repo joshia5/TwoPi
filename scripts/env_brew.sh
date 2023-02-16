@@ -35,6 +35,7 @@ echo "$0" $0
 source $(dirname $BASH_SOURCE)/env_common.sh
 
 SCALAPACK_LIBRARIES=$(brew --prefix)/opt/scalapack
+LAPACK_LIBRARIES=$(brew --prefix)/opt/openblas
 BLAS_LIBRARIES=$(brew --prefix)/opt/openblas
 
 source $(dirname $BASH_SOURCE)/env_common_finish.sh
