@@ -37,7 +37,7 @@ source $(dirname $BASH_SOURCE)/env_common.sh
 SCALAPACK_LIBRARIES=$(brew --prefix)/opt/scalapack
 LAPACK_LIBRARIES=$(brew --prefix)/opt/openblas
 BLAS_LIBRARIES=$(brew --prefix)/opt/openblas
-MACOSX_DEPLOYMENT_TARGET = $(python -c "import platform;print(platform.platform().split('-')[1].split('.')[0])")
+MACOSX_DEPLOYMENT_TARGET=$(python -c "import platform;print(platform.platform().split('-')[1].split('.')[0])")
 
 source $(dirname $BASH_SOURCE)/env_common_finish.sh
 
