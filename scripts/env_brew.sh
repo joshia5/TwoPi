@@ -38,3 +38,7 @@ SCALAPACK_LIBRARIES=$(brew --prefix)/opt/scalapack/
 BLAS_LIBRARIES=$(brew --prefix)/opt/openblas
 
 source $(dirname $BASH_SOURCE)/env_common_finish.sh
+
+echo "LLLLL"${SCALAPACK_LIB}
+
+
