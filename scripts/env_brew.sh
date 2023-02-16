@@ -33,3 +33,8 @@ OMPFCFLAG=-fopenmp
 MAKEOPT="-j "$(python -c "import multiprocessing as mp;print(mp.cpu_count())")
 echo "$0" $0
 source $(dirname $BASH_SOURCE)/env_common.sh
+
+SCALAPACK_LIBRARIES=$(brew --prefix)/opt/scalapack/
+BLAS_LIBRARIES=$(brew --prefix)/opt/openblas
+
+source $(dirname $BASH_SOURCE)/env_common_finish.sh
