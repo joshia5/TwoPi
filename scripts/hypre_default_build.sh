@@ -54,6 +54,7 @@ COMM=${CMAKE}" .. -DCMAKE_VERBOSE_MAKEFILE=1                             \
 	  -DMPI_C_COMPILER=${MPICC}                                      \
 	  -DCMAKE_C_COMPILER=${CC}                                       \
           -DCMAKE_INSTALL_PREFIX=${TwoPiRoot}                            \
+          -DCMAKE_OSX_DEPLOYMENT_TARGET=${MACOSX_DEPLOYMENT_TARGET}      \
           -DCMAKE_INSTALL_NAME_DIR=${TwoPiRoot}/lib"     
 
 COMM=${COMM}"${CUDA_OPTS}"
