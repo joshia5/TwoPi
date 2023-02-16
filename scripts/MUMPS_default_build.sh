@@ -114,6 +114,7 @@ if [[ "${_USE_DEBUG}" == "ON" ]]; then
 fi
 
 echo "LLLLL"$SCALAPACK_LIB
+export SCALAPACK_LIB="${SCALAPACK_LIB}"
 
 $MAKE all MPICC=${MPICC} MPIFC=${MPIFC} MPIFL=${MPIFL} \
       OMPFCFLAG=${OMPFCFLAG} \
