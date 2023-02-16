@@ -113,6 +113,8 @@ if [[ "${_USE_DEBUG}" == "ON" ]]; then
     sed -i${BKEXT} 's,OPTL    = -O,OPTL    = -g,g' Makefile.inc
 fi
 
+echo "LLLLL"$SCALAPACK_LIB
+
 $MAKE all MPICC=${MPICC} MPIFC=${MPIFC} MPIFL=${MPIFL} \
       OMPFCFLAG=${OMPFCFLAG} \
       OMPLINKFLAG=${OMPLINKFLAG} OMPCCFLAG=${OMPCCFLAG} $MAKEOPT
