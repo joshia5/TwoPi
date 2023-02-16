@@ -5,13 +5,9 @@
 #     brew version of twopi_env
 #
 #       1) devicename = brew
-#       2) add gmsh.py, wxpython path to PYTHONPATH
-#               /usr/local/Cellar/gmsh/4.4.1/lib
-#               /usr/local/opt/wxpython/libexec/lib/python3.7/site-packages/
+#       2) set LDFLAGS, CFLAGS, CPPFLAGS to point $(brew --prefix)/xxx
 #       3) add PATH the following
 #               /usr/local/opt/llvm/bin
-#               /usr/local/opt/python/libexec/bin
-#       4) we don't use virtualenv, so PYTHON is python3
 
 #     set enviromental variables to use twopi
 #
@@ -27,6 +23,10 @@
 SC="$(dirname  "$BASH_SOURCE[0]")"
 TWOPIROOT=$SC
 source ${SC}/configure_env.sh
+
+export CFLAGS="-I$(brew --prefix)/include"
+export CPPFLAGS="-I$(brew --prefix)/include"
+export LDPFLAGS="-L$(brew --prefix)/lib"
 
 ## this is purposly added at the very end to use futurize. but not to use pytonn in
 ## venv
@@ -58,8 +58,11 @@ else
 fi
 
 LLVMBIN=$(brew --prefix)/opt/llvm/bin
-
 export PATH=$LLVMBIN:$PATH
+
+
+ln -s $(brew --prefix)/include/rapidjson $TwoPiRoot/include/
+
 # this is necessary to luanch piScope with proper framework enviroment
 
 INTERPRETER=$(which python)
