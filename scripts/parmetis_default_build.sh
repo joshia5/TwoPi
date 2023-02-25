@@ -69,6 +69,7 @@ else
 fi
 
 export CFLAGS="${CFLAGS} -fPIC"
+export MACOSX_DEPLOYMENT_TARGET="${MACOSX_DEPLOYMENT_TARGET}"
 
 $MAKE config shared=1 prefix=$TwoPiRoot cc=$MPICC cxx=$MPICXX
 $MAKE $MAKEOPT

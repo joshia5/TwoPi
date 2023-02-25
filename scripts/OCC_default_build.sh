@@ -19,6 +19,6 @@ $CMAKE .. -DCMAKE_VERBOSE_MAKEFILE=1          \
           -DCMAKE_CXX_COMPILER=${CXX}         \
           -DCMAKE_CXX_FLAGS=$CXX11FLAG        \
           -DCMAKE_INSTALL_NAME_DIR=${TwoPiRoot}/lib
-#$MAKE $MAKEOPT
-$MAKE -j
+
+$MAKE $MAKEOPT
 $MAKE install

@@ -65,6 +65,8 @@ else
     sed -i${BKEXT} 's/#define REALTYPEWIDTH 64/#define REALTYPEWIDTH 32/g' include/metis.h
 fi
 
+export MACOSX_DEPLOYMENT_TARGET="${MACOSX_DEPLOYMENT_TARGET}"
+
 $MAKE config shared=1 prefix=$TwoPiRoot cc=${CC}
 $MAKE $MAKEOPT
 $MAKE install
