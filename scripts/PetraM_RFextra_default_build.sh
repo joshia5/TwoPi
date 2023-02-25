@@ -8,5 +8,5 @@ cd $REPO
 
 
 export PetraM=${TwoPiRoot}
-$PYTHON -m pip install ./ -verbose
+$PYTHON -m pip install ./ --verbose
 
