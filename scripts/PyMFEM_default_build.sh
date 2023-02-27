@@ -133,18 +133,16 @@ fi
 if $DO_SERIAL;then
     ${PYTHON} setup.py install                   \
            --prefix=${TwoPiRoot}                 \
-	   --mfem-prefix-no-swig                 \
            --mfem-prefix=${TwoPiRoot}/mfem       \
            --mfemp-prefix=${TwoPiRoot}/mfem/par  \
            --mfems-prefix=${TwoPiRoot}/mfem/ser  \
            --mfem-source=${TwoPiRoot}/src/mfem   \
-	   $ENABLE_CUDA                          \  
+	   $ENABLE_CUDA                          \
 	   $DRY_RUN
 fi
 
 if $DO_PARALLEL ;then
     ${PYTHON} setup.py install                          \
-           --mfem-prefix-no-swig                        \
            --no-serial                                  \
            --with-parallel                              \
            --prefix=${TwoPiRoot}                        \
