@@ -6,7 +6,8 @@ echo $SC
 source ${SC}/configure_env.sh
 
 # define two alias as text 
-ALIAS_PISCOPE="alias piscope=\"${TwoPiRoot}/bin/piscope -e ${INTERPRETER}\""
+# ALIAS_PISCOPE="alias piscope=\"${TwoPiRoot}/bin/piscope -e ${INTERPRETER}\""
+ALIAS_PISCOPE="alias piscope=\"${TwoPiRoot}/bin/piscope -e ${PYTHON}\""
 ALIAS_CIAO="alias ciao=\"echo Addio!;exit\""
 ALIAS_TWOPI="alias twopi=\"${TwoPiRoot}/TwoPi/bin/twopi\""
 

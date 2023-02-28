@@ -12,6 +12,8 @@
 #       $TwoPiRoot/lib/pythonA.B/site-packages
 #     A.B is inferred from os.__file__
 
+SOURCE=${BASH_SOURCE[0]}
+export PATH=$(dirname $SOURCE):$PATH
 function ostype() {
     unameOut="$(uname -s)"
     case "${unameOut}" in
@@ -24,7 +26,7 @@ function ostype() {
     echo ${machine}
 }
 function safe_realpath() {
-   OSTYPE=$(ostype)  
+   OSTYPE=$(ostype)
    if [ -x "$(command -v realpath)" ]; then
       #echo "realpath found !"
       realpath $1
@@ -33,7 +35,7 @@ function safe_realpath() {
    if [ "$OSTYPE" == "Mac" ]; then
       # we dont try readlink in Mac since it is different 
       # readlink (BSD) used in Linuxxa
-      echo "realpath is not avaialbe emulating it with python (Mac)"
+      #echo "realpath is not avaialbe emulating it with python (Mac)"
       python -c 'import os,sys;print(os.path.realpath("'"$1"'"))'
       exit 0
    fi
@@ -43,9 +45,10 @@ function safe_realpath() {
       return
    fi
    # I am not sure if it comes to this fallback...
-   echo "realpath is not avaialbe emulating it with python"
+   #echo "realpath is not avaialbe emulating it with python"
    python -c 'import os,sys;print(os.path.realpath("'"$1"'"))'
 }
+
 
 SC="$(safe_realpath  "$BASH_SOURCE")"
 SC="$(dirname $SC)"
@@ -65,7 +68,7 @@ export PATH=$TwoPiRoot/bin:$PATH
 # we get this number from os.__file__
 
 PYTHON=$TwoPiRoot/bin/python
-PYTHONVERSION=$(${PYTHON} -c "import os;print(os.path.basename(os.path.dirname(os.__file__))[-3:])")
+PYTHONVERSION=$(${PYTHON} -c "import os;print(os.path.basename(os.path.dirname(os.__file__))[6:])")
 PYTHONLIB=$TwoPiRoot/lib/python${PYTHONVERSION}
 mkdir -p $PYTHONLIB/site-packages
 export PYTHONPATH=$PYTHONLIB/site-packages:$PYTHONPATH

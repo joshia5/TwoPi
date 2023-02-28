@@ -88,7 +88,7 @@ echo $MAKEINC
 cp $MAKEINC ${REPO}/Makefile.inc
 cd ${REPO}
 
-ORDERING="-Dport"
+ORDERING="-Dpord"
 BKEXT=''
 if [[ "${TwoPiDevice}" == "brew" ]]; then
   BKEXT='.bu'   ### On MacOS, -i option needs extension.
@@ -112,6 +112,10 @@ if [[ "${_USE_DEBUG}" == "ON" ]]; then
     sed -i${BKEXT} 's,OPTC    = -O,OPTC    = -g,g' Makefile.inc
     sed -i${BKEXT} 's,OPTL    = -O,OPTL    = -g,g' Makefile.inc
 fi
+
+export SCALAPACK_LIB="${SCALAPACK_LIB}"
+export LAPACK_LIB="${LAPACK_LIB}"
+export BLAS_LIB="${BLAS_LIB}"
 
 $MAKE all MPICC=${MPICC} MPIFC=${MPIFC} MPIFL=${MPIFL} \
       OMPFCFLAG=${OMPFCFLAG} \
