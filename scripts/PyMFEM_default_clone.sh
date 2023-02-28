@@ -5,7 +5,7 @@ SRCDIR=${TwoPiRoot}/src
 REPO="PyMFEM"
 
 DO_LATEST=true
-BRANCH=master
+BRANCH=adaptive_workflow
 
 while [[ $# -gt 0 ]]
 do
@@ -33,7 +33,7 @@ done
 SC=$(dirname "$0")/subs/git_access.sh
 source $SC
 
-git_clone_or_pull "https://github.com/mfem/PyMFEM.git" $REPO $SRCDIR
+git_clone_or_pull "https://github.com/joshia5/PyMFEM.git" $REPO $SRCDIR
 
 if [ ! -f ${SRCDIR}/${REPO} ]; then
    cd ${SRCDIR}/${REPO}
