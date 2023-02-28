@@ -45,7 +45,7 @@ case $key in
 esac
 done
 
-cd ${SRCDIR}/metis-5.1.0
+cd ${SRCDIR}/METIS
 
 BKEXT=''
 if [[ "${TwoPiDevice}" == "brew" ]]; then
@@ -65,7 +65,13 @@ else
     sed -i${BKEXT} 's/#define REALTYPEWIDTH 64/#define REALTYPEWIDTH 32/g' include/metis.h
 fi
 
+export MACOSX_DEPLOYMENT_TARGET="${MACOSX_DEPLOYMENT_TARGET}"
+
 $MAKE config shared=1 prefix=$TwoPiRoot cc=${CC}
+$MAKE $MAKEOPT
+$MAKE install
+
+$MAKE config prefix=$TwoPiRoot cc=${CC}
 $MAKE $MAKEOPT
 $MAKE install
 

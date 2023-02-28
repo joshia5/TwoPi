@@ -58,6 +58,7 @@ COMM="$CMAKE .. -DCMAKE_VERBOSE_MAKEFILE=1                         \
           -DMFEM_USE_EXCEPTIONS=1                            \
           -DCMAKE_CXX_FLAGS=$CXX11FLAG                       \
 	  -DCMAKE_CXX_COMPILER=${CXX}                        \
+          -DCMAKE_OSX_DEPLOYMENT_TARGET=${MACOSX_DEPLOYMENT_TARGET} \
 	  -DMFEM_USE_CUDA=${ENABLE_CUDA}"
 
 COMM=${COMM}"${CUDA_OPTS}"

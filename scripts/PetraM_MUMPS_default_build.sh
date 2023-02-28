@@ -93,6 +93,12 @@ export USE_METIS=${_USE_METIS}
 export USE_SCOTCH=${_USE_SCOTCH}
 export USE_DEBUG=${_USE_DEBUG}
 
+export SCALAPACK_LIB="${SCALAPACK_LIB}"
+export LAPACK_LIB="${LAPACK_LIB}"
+export BLAS_LIB="${BLAS_LIB}"
+
+export CPATH=${TwoPiRoot}/src/MUMPS_$MUMPS_VERSION}/include
+
 SCRIPT=$(dirname "$0")/buildcomponent.sh
 ${SCRIPT} PetraM_MUMPS build1
 ${SCRIPT} PetraM_MUMPS build2

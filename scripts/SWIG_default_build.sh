@@ -11,6 +11,6 @@ source $SCRIPT
 
 cd ${REPO}
 ${REPO}/autogen.sh
-${REPO}/configure --prefix=${TwoPiRoot}
+${REPO}/configure --prefix=${TwoPiRoot}/SWIG_4_0_2
 $MAKE
 $MAKE install

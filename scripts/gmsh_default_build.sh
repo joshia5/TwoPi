@@ -57,7 +57,7 @@ $MAKE install
 
 # add link to gmsh.py. it seems like there is two possible locations
 PYTHON=$TwoPiRoot/bin/python
-PYTHONVERSION=$(${PYTHON} -c "import os;print(os.path.basename(os.path.dirname(os.__file__))[-3:])")
+PYTHONVERSION=$(${PYTHON} -c "import os;print(os.path.basename(os.path.dirname(os.__file__))[6:])")
 cd $TwoPiRoot/lib/python${PYTHONVERSION}/site-packages
 
 if [ -L gmsh.py ] ; then

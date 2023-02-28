@@ -30,14 +30,12 @@ fi
 echo "OCC header :"${OCC_HEADER}
 echo "OCC lib    :"${OCC_LIB}
 
-
-FILE=$REPO/src/SWIG_files/wrapper/ShapeUpgrade.i
-
 #
 # patching for now 7.5.1 SWIG source to build OCC-7.5.3 until OCC addresses the issue.
 #
-echo "PATCHING :"${FILE}
-${PYTHON} -c "txt=open('${FILE}').read().replace('#include<Precision.hxx>', '#include<Precision.hxx>\n#include<TopoDS_Edge.hxx>');fid=open('${FILE}', 'w');fid.write(txt)"
+#FILE=$REPO/src/SWIG_files/wrapper/ShapeUpgrade.i
+#echo "PATCHING :"${FILE}
+#${PYTHON} -c "txt=open('${FILE}').read().replace('#include<Precision.hxx>', '#include<Precision.hxx>\n#include<TopoDS_Edge.hxx>');fid=open('${FILE}', 'w');fid.write(txt)"
 
 mkdir -p $REPO/cmbuild
 cd $REPO/cmbuild
@@ -49,6 +47,7 @@ $CMAKE .. -DCMAKE_INSTALL_PREFIX=${TwoPiRoot}     \
           -DOCE_LIB_PATH=${OCC_LIB}               \
           -DCMAKE_C_COMPILER=${CC}                \
           -DCMAKE_CXX_COMPILER=${CXX}             \
+          -DSWIG_EXECUTABLE=${TwoPiRoot}/SWIG_4_0_2/bin/swig   \
           -DPYTHONOCC_INSTALL_DIRECTORY=${OCC_INSTALL_DIR}
 
 $MAKE VERBOSE=1 $MAKEOPT
