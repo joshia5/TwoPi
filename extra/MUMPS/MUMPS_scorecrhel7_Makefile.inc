@@ -53,7 +53,7 @@ RANLIB = ranlib
 #MKLROOT=/home/software/intel/2017-01/compilers_and_libraries_2017.1.132/linux/mkl/lib/intel64
 #LAPACK = -llapack
 
-SCALAP = -L$(NETLIB_SCALAPACK_ROOT)/lib -lscalapack -L$(NETLIB_LAPACK_ROOT)/lib64 -llapack -lblas -lm 
+SCALAP = -L/opt/scorec/spack/v0181_1/install/linux-rhel7-x86_64/gcc-11.2.0/netlib-scalapack-2.2.0-nvxjelius47lzkjoerkhnzqvgtqepm3v/lib -lscalapack -L/opt/scorec/spack/v0181_1/install/linux-rhel7-x86_64/gcc-11.2.0/netlib-lapack-3.10.1-ipryv26mm4nwratce6r3rynlxuybrdwi/lib64 -llapack -lblas -lm 
 INCPAR = -I$(MPICH_ROOT)/include
 LIBPAR = $(SCALAP) 
 
